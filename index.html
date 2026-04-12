@@ -574,11 +574,17 @@
       border-radius: 28px;
       overflow: hidden;
       margin-bottom: 22px;
-      background: radial-gradient(circle at 50% 8%, rgba(255,255,255,0.14), transparent 24%),
-                  linear-gradient(180deg, rgba(14, 13, 12, 0.96), rgba(10, 10, 10, 0.96));
+      background: linear-gradient(180deg, rgba(14, 13, 12, 0.96), rgba(10, 10, 10, 0.96));
       display: grid;
       place-items: center;
       box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+    }
+
+    .card-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .card-visual::before {
@@ -922,29 +928,29 @@
   </div>
 
   <script>
-    const number = '201112055789';
+    const number = '201110511138';
     const categories = ['All', 'Women', 'Men', 'Unisex'];
     const products = [
-      {name: 'Baccarat Rouge', price: 1550, category: 'Unisex', desc: 'A luminous fusion of amber and rose for a captivating evening signature.'},
-      {name: 'Khamra', price: 1380, category: 'Women', desc: 'A warm oriental creation with notes of amber, saffron, and dark florals.'},
-      {name: 'Libre', price: 1420, category: 'Women', desc: 'A bold, floral-oriental scent balancing lavender and orange blossom.'},
-      {name: 'Dior', price: 1630, category: 'Unisex', desc: 'An iconic fragrance with powerful depth and elegant precision.'},
-      {name: 'Chanel No. 5', price: 1800, category: 'Women', desc: 'An eternal ode to femininity with luminous aldehydes and jasmine.'},
-      {name: 'Coco Mademoiselle (Chanel)', price: 1480, category: 'Women', desc: 'A modern classic with sensual vanilla and sparkling citrus.'},
-      {name: 'Good Girl – Carolina Herrera', price: 1520, category: 'Women', desc: 'A daring blend of rose, jasmine, and dark tonka bean.'},
-      {name: 'Miss Dior', price: 1400, category: 'Women', desc: 'A romantic floral statement refined with patchouli and sweetness.'},
-      {name: 'Valentino', price: 1460, category: 'Women', desc: 'A luxurious oriental spicy fragrance with velvet petals and woods.'},
-      {name: 'Black Opium (YSL)', price: 1470, category: 'Women', desc: 'A seductive coffee-floral fragrance with addictive gourmand accents.'},
-      {name: 'La Vie Est Belle (Lancôme)', price: 1390, category: 'Women', desc: 'A luminous, elegant blend of iris, patchouli, and praline.'},
-      {name: 'Dior Sauvage', price: 1490, category: 'Men', desc: 'A fresh, rugged scent charged with bergamot and spicy amberwood.'},
-      {name: 'Bleu de Chanel', price: 1500, category: 'Men', desc: 'A refined woody aromatic scent crafted for modern confidence.'},
-      {name: 'Acqua di Giò', price: 1320, category: 'Men', desc: 'A breezy aquatic masterpiece radiating Mediterranean freshness.'},
-      {name: 'Rasasi Hawas for Him', price: 1280, category: 'Men', desc: 'A bold blend of citrus, spices, and exotic woods for striking charm.'},
-      {name: 'One Million', price: 1310, category: 'Men', desc: 'A lavish, spicy-golden fragrance with leather and amber allure.'},
-      {name: '212', price: 1240, category: 'Men', desc: 'A sleek urban aroma that balances freshness with city energy.'},
-      {name: 'Bad Boy', price: 1330, category: 'Men', desc: 'A dark, striking scent built with black and white pepper and tonka.'},
-      {name: 'Jean Paul', price: 1290, category: 'Men', desc: 'A charismatic fragrance with cedarwood, orange blossom and woods.'},
-      {name: 'Stronger With You', price: 1360, category: 'Men', desc: 'A warm, intimate blend of vanilla, chestnut, and spicy lavender.'}
+      {name: 'Baccarat Rouge', price: 1550, category: 'Unisex', desc: 'A luminous fusion of amber and rose for a captivating evening signature.', image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=80'},
+      {name: 'Khamra', price: 1380, category: 'Women', desc: 'A warm oriental creation with notes of amber, saffron, and dark florals.', image: 'https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=900&q=80'},
+      {name: 'Libre', price: 1420, category: 'Women', desc: 'A bold, floral-oriental scent balancing lavender and orange blossom.', image: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80'},
+      {name: 'Dior', price: 1630, category: 'Unisex', desc: 'An iconic fragrance with powerful depth and elegant precision.', image: 'https://images.unsplash.com/photo-1493666438817-866a91353ca9?auto=format&fit=crop&w=900&q=80'},
+      {name: 'Chanel No. 5', price: 1800, category: 'Women', desc: 'An eternal ode to femininity with luminous aldehydes and jasmine.', image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=80'},
+      {name: 'Coco Mademoiselle (Chanel)', price: 1480, category: 'Women', desc: 'A modern classic with sensual vanilla and sparkling citrus.', image: 'https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=900&q=80'},
+      {name: 'Good Girl – Carolina Herrera', price: 1520, category: 'Women', desc: 'A daring blend of rose, jasmine, and dark tonka bean.', image: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80'},
+      {name: 'Miss Dior', price: 1400, category: 'Women', desc: 'A romantic floral statement refined with patchouli and sweetness.', image: 'https://images.unsplash.com/photo-1493666438817-866a91353ca9?auto=format&fit=crop&w=900&q=80'},
+      {name: 'Valentino', price: 1460, category: 'Women', desc: 'A luxurious oriental spicy fragrance with velvet petals and woods.', image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=80'},
+      {name: 'Black Opium (YSL)', price: 1470, category: 'Women', desc: 'A seductive coffee-floral fragrance with addictive gourmand accents.', image: 'https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=900&q=80'},
+      {name: 'La Vie Est Belle (Lancôme)', price: 1390, category: 'Women', desc: 'A luminous, elegant blend of iris, patchouli, and praline.', image: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80'},
+      {name: 'Dior Sauvage', price: 1490, category: 'Men', desc: 'A fresh, rugged scent charged with bergamot and spicy amberwood.', image: 'https://images.unsplash.com/photo-1493666438817-866a91353ca9?auto=format&fit=crop&w=900&q=80'},
+      {name: 'Bleu de Chanel', price: 1500, category: 'Men', desc: 'A refined woody aromatic scent crafted for modern confidence.', image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=80'},
+      {name: 'Acqua di Giò', price: 1320, category: 'Men', desc: 'A breezy aquatic masterpiece radiating Mediterranean freshness.', image: 'https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=900&q=80'},
+      {name: 'Rasasi Hawas for Him', price: 1280, category: 'Men', desc: 'A bold blend of citrus, spices, and exotic woods for striking charm.', image: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80'},
+      {name: 'One Million', price: 1310, category: 'Men', desc: 'A lavish, spicy-golden fragrance with leather and amber allure.', image: 'https://images.unsplash.com/photo-1493666438817-866a91353ca9?auto=format&fit=crop&w=900&q=80'},
+      {name: '212', price: 1240, category: 'Men', desc: 'A sleek urban aroma that balances freshness with city energy.', image: 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=80'},
+      {name: 'Bad Boy', price: 1330, category: 'Men', desc: 'A dark, striking scent built with black and white pepper and tonka.', image: 'https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=900&q=80'},
+      {name: 'Jean Paul', price: 1290, category: 'Men', desc: 'A charismatic fragrance with cedarwood, orange blossom and woods.', image: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80'},
+      {name: 'Stronger With You', price: 1360, category: 'Men', desc: 'A warm, intimate blend of vanilla, chestnut, and spicy lavender.', image: 'https://images.unsplash.com/photo-1493666438817-866a91353ca9?auto=format&fit=crop&w=900&q=80'}
     ];
 
     const grid = document.getElementById('productGrid');
@@ -977,6 +983,10 @@
 
     function formatPrice(value) {
       return `EGP ${value.toLocaleString('en-US')}`;
+    }
+
+    function getDiscountedPrice(price) {
+      return Math.round(price * 0.95);
     }
 
     function getVisualGradient(index) {
@@ -1064,29 +1074,19 @@
     function createCard(product, index) {
       const sizes = ['30ml', '50ml', '100ml'];
       const defaultSize = '50ml';
+      const discountedBasePrice = getDiscountedPrice(product.price);
       const card = document.createElement('article');
       card.className = 'card';
       card.innerHTML = `
         <div class="card-visual" aria-hidden="true">
-          <div class="icon-stage">
-            <div class="icon-glow"></div>
-            <div class="bottle">
-              <div class="bottle-cap"></div>
-              <div class="bottle-neck"></div>
-              <div class="bottle-base" style="background: ${getVisualGradient(index)};
-                border: 1px solid rgba(255,255,255,0.12);
-                box-shadow: 0 18px 36px rgba(0,0,0,0.24), inset 0 0 0 1px rgba(255,255,255,0.04);
-              "></div>
-              <div class="bottle-label"><strong>SHAHENDA</strong>STORE</div>
-            </div>
-          </div>
+          <img src="${product.image}" alt="Photo of ${product.name}" loading="lazy" />
         </div>
         <div class="card-body">
           <h2 class="card-title">${product.name}</h2>
           <p class="card-subtitle">${product.desc}</p>
-          <div class="price"><span>${formatPrice(product.price)}</span><small>starting price in EGP</small></div>
+          <div class="price"><span class="old-price">${formatPrice(product.price)}</span><span class="new-price">${formatPrice(discountedBasePrice)}</span><small>starting price in EGP</small></div>
           <div class="sizes" role="radiogroup" aria-label="Size selector for ${product.name}"></div>
-          <a class="buy" href="#" data-product="${encodeURIComponent(product.name)}" data-size="${defaultSize}" data-price="${Math.round(product.price * sizeMultipliers[defaultSize])}">Buy Now</a>
+          <a class="buy" href="#" data-product="${encodeURIComponent(product.name)}" data-size="${defaultSize}" data-price="${Math.round(discountedBasePrice * sizeMultipliers[defaultSize])}">Buy Now</a>
         </div>
       `;
 
@@ -1102,7 +1102,7 @@
           button.classList.add('active');
           const buyLink = card.querySelector('.buy');
           buyLink.dataset.size = size;
-          buyLink.dataset.price = Math.round(product.price * sizeMultipliers[size]);
+          buyLink.dataset.price = Math.round(discountedBasePrice * sizeMultipliers[size]);
         });
         sizeContainer.appendChild(button);
       });
