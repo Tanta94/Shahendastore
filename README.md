@@ -1,13 +1,11 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luxe Éclat - Premium Perfumes</title>
+    <title>Shahenda Store - Premium Perfumes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Playfair+Display:wght@400;500;600&display=swap');
-        
         * {
             margin: 0;
             padding: 0;
@@ -15,342 +13,298 @@
         }
 
         body {
-            font-family: 'Playfair Display', serif;
-            background: radial-gradient(ellipse at center, #0a0a0a 0%, #000000 70%);
-            color: #f5f5f5;
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #f0f0f0;
+            line-height: 1.6;
             overflow-x: hidden;
-            cursor: none;
         }
 
-        /* Custom Cursor */
-        .cursor {
-            position: fixed;
-            width: 20px;
-            height: 20px;
-            background: radial-gradient(circle, #d4af37, #b8860b);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9999;
-            mix-blend-mode: difference;
-            transition: transform 0.1s ease;
-        }
-
-        .cursor-follower {
-            position: fixed;
-            width: 40px;
-            height: 40px;
-            border: 1px solid #d4af37;
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 9998;
-            transition: all 0.3s ease;
-            opacity: 0.3;
-        }
-
-        /* Intro Animation */
-        .intro {
+        /* Header */
+        .header {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
             position: fixed;
             top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: radial-gradient(ellipse at center, #1a0f00 0%, #000000 70%);
+            width: 100%;
             z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+        }
+
+        .nav {
+            max-width: 1200px;
+            margin: 0 auto;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            padding: 0 2rem;
         }
 
-        .perfume-bottle {
-            position: relative;
-            width: 300px;
-            height: 500px;
-            transform-style: preserve-3d;
-            animation: bottleIntro 4s ease-out forwards;
-        }
-
-        .bottle-body {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            height: 350px;
-            background: linear-gradient(145deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
-            border-radius: 60px 60px 20px 20px;
-            box-shadow: 
-                0 20px 40px rgba(0,0,0,0.8),
-                inset 0 10px 20px rgba(255,255,255,0.1),
-                inset -10px 0 20px rgba(26,26,46,0.3);
-            animation: bottleRise 3s ease-out 0.5s forwards;
-            opacity: 0;
-        }
-
-        .bottle-cap {
-            position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 60px;
-            background: linear-gradient(145deg, #d4af37 0%, #b8860b 100%);
-            border-radius: 50px 50px 20px 20px;
-            box-shadow: 
-                0 15px 30px rgba(212,175,55,0.4),
-                inset 0 5px 10px rgba(255,255,255,0.3);
-            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .cap-open {
-            animation: capLift 2s ease-out 2s forwards;
-            transform: translateX(-50%) translateY(-80px) rotateX(15deg);
-        }
-
-        .fragrance-mist {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 200px;
-            height: 200px;
-            opacity: 0;
-        }
-
-        .mist-particle {
-            position: absolute;
-            background: radial-gradient(circle, rgba(212,175,55,0.8) 0%, rgba(138,134,11,0.4) 70%, transparent 100%);
-            border-radius: 50%;
-            animation: mistFloat 4s ease-out infinite;
-        }
-
-        /* Main Content */
-        .main-content {
-            position: relative;
-            z-index: 1;
-            opacity: 0;
-            transform: translateY(50px);
-            animation: fadeInUp 1s ease-out 4.5s forwards;
-        }
-
-        .hero-section {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-        }
-
-        .hero-title {
-            font-family: 'Cinzel', serif;
-            font-size: clamp(3rem, 8vw, 8rem);
-            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 50%, #b8860b 100%);
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 1rem;
-            filter: drop-shadow(0 10px 20px rgba(212,175,55,0.5));
         }
 
-        .hero-subtitle {
+        .cart-icon {
+            position: relative;
             font-size: 1.5rem;
-            color: #ccc;
-            margin-bottom: 3rem;
-            font-weight: 300;
+            color: #ffd700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cart-icon:hover {
+            transform: scale(1.1);
+            color: #ffed4e;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+            position: relative;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 700;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1.5rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            opacity: 0.9;
         }
 
         .cta-button {
+            display: inline-block;
             padding: 1rem 3rem;
-            font-size: 1.2rem;
-            background: linear-gradient(145deg, #d4af37, #b8860b);
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
             color: #000;
-            border: none;
+            text-decoration: none;
             border-radius: 50px;
-            cursor: none;
-            font-family: inherit;
-            font-weight: 500;
-            box-shadow: 0 15px 35px rgba(212,175,55,0.4);
+            font-weight: 600;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
         }
 
         .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 50px rgba(212,175,55,0.6);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(255, 215, 0, 0.4);
         }
 
         /* Products Section */
         .products-section {
-            padding: 10rem 2rem;
+            padding: 120px 2rem 4rem;
             max-width: 1400px;
             margin: 0 auto;
         }
 
         .section-title {
-            font-family: 'Cinzel', serif;
-            font-size: 4rem;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
             text-align: center;
-            margin-bottom: 5rem;
-            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 50%, #b8860b 100%);
+            margin-bottom: 4rem;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 10px 20px rgba(212,175,55,0.3));
+            background-clip: text;
         }
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 4rem;
-            padding: 2rem 0;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
         }
 
         .product-card {
-            perspective: 1000px;
-            height: 500px;
-            cursor: none;
-        }
-
-        .product-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .product-front, .product-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
+            background: rgba(20, 20, 20, 0.8);
             border-radius: 20px;
             padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.05), transparent);
+            transition: left 0.5s;
+        }
+
+        .product-card:hover::before {
+            left: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            background: rgba(30, 30, 30, 0.95);
+            box-shadow: 0 30px 60px rgba(255, 215, 0, 0.2);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .product-image {
+            width: 140px;
+            height: 200px;
+            margin: 0 auto 1.5rem;
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            text-align: center;
+            font-size: 3rem;
         }
 
-        .product-front {
-            background: linear-gradient(145deg, rgba(26,26,46,0.9) 0%, rgba(10,10,10,0.95) 100%);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
-        }
-
-        .product-back {
-            background: linear-gradient(145deg, rgba(212,175,55,0.1) 0%, rgba(184,134,11,0.05) 100%);
-            transform: rotateY(180deg);
-            box-shadow: 0 30px 60px rgba(212,175,55,0.2);
-        }
-
-        .product-bottle {
-            width: 150px;
-            height: 300px;
-            margin-bottom: 2rem;
-            position: relative;
-            transition: all 0.4s ease;
+        .product-card:hover .product-image {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
         }
 
         .product-name {
-            font-family: 'Cinzel', serif;
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #f0f0f0;
+        }
+
+        .product-description {
+            color: #b0b0b0;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
         }
 
         .product-price {
             font-size: 1.5rem;
-            color: #d4af37;
-            font-weight: 600;
+            font-weight: 700;
+            color: #ffd700;
+            margin-bottom: 1.5rem;
         }
 
-        /* Hover Effects */
-        .product-card:hover .product-container {
-            transform: rotateY(180deg) rotateX(10deg);
+        .size-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
-        .product-card:hover .product-bottle {
-            transform: scale(1.1) translateZ(50px);
+        .size-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            background: transparent;
+            color: #ffd700;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
 
-        /* Parallax */
-        .parallax-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
+        .size-btn:hover, .size-btn.active {
+            background: #ffd700;
+            color: #000;
+            border-color: #ffd700;
+            transform: scale(1.05);
+        }
+
+        .buy-now-btn {
             width: 100%;
-            height: 100%;
-            background: 
-                radial-gradient(circle at 20% 80%, rgba(212,175,55,0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(138,134,11,0.1) 0%, transparent 50%);
-            z-index: -1;
-            will-change: transform;
+            padding: 1rem;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #000;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .buy-now-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(255, 215, 0, 0.4);
+        }
+
+        .buy-now-btn:active {
+            transform: translateY(0);
         }
 
         /* Animations */
-        @keyframes bottleIntro {
-            0% { opacity: 0; transform: scale(0.5) rotateX(90deg); }
-            50% { opacity: 1; transform: scale(1) rotateX(0); }
-            100% { opacity: 1; transform: scale(1) rotateX(0); }
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5)); }
+            to { filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8)); }
         }
 
-        @keyframes bottleRise {
-            to { opacity: 1; transform: translateX(-50%) translateY(-20px); }
-        }
-
-        @keyframes capLift {
-            0% { transform: translateX(-50%) translateY(0) rotateX(0); }
-            100% { transform: translateX(-50%) translateY(-80px) rotateX(15deg); }
-        }
-
-        @keyframes mistFloat {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(0) translateZ(0);
-            }
-            20% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1) translateZ(20px);
-            }
-            80% {
-                opacity: 0.3;
-                transform: translate(-50%, -50%) scale(1.2) translateZ(50px);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -50%) scale(1.5) translateZ(100px);
-            }
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .products-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
+            .nav {
+                padding: 0 1rem;
             }
             
-            .hero-title {
-                font-size: 3rem;
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            .product-card {
+                padding: 1.5rem;
             }
         }
 
-        /* Scroll Animations */
+        @media (max-width: 480px) {
+            .products-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Scroll animations */
         .fade-in {
             opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
         }
 
         .fade-in.visible {
@@ -360,134 +314,155 @@
     </style>
 </head>
 <body>
-    <!-- Custom Cursor -->
-    <div class="cursor"></div>
-    <div class="cursor-follower"></div>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">Shahenda Store</div>
+            <div class="cart-icon">🛒</div>
+        </nav>
+    </header>
 
-    <!-- Parallax Background -->
-    <div class="parallax-bg"></div>
-
-    <!-- Intro Animation -->
-    <div class="intro" id="intro">
-        <div class="perfume-bottle">
-            <div class="bottle-cap" id="bottleCap"></div>
-            <div class="bottle-body"></div>
-            <div class="fragrance-mist" id="mistContainer"></div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Premium Perfumes</h1>
+            <p>Discover the world's most luxurious fragrances. Timeless elegance in every bottle.</p>
+            <a href="#products" class="cta-button">Shop Collection</a>
         </div>
-    </div>
+    </section>
 
-    <!-- Main Content -->
-    <div class="main-content">
-        <!-- Hero Section -->
-        <section class="hero-section fade-in">
-            <h1 class="hero-title">Luxe Éclat</h1>
-            <p class="hero-subtitle">Experience the art of fragrance</p>
-            <button class="cta-button">Discover Collection</button>
-        </section>
-
-        <!-- Products Section -->
-        <section class="products-section">
-            <h2 class="section-title fade-in">Our Signature Collection</h2>
-            <div class="products-grid">
-                <div class="product-card fade-in">
-                    <div class="product-container">
-                        <div class="product-front">
-                            <div class="product-bottle" style="background: linear-gradient(145deg, #8B008B, #4B0082);"></div>
-                            <h3 class="product-name">Amethyst Noir</h3>
-                            <p class="product-price">$285</p>
-                        </div>
-                        <div class="product-back">
-                            <h3 class="product-name">Amethyst Noir</h3>
-                            <p>Deep violet notes of blackcurrant, jasmine, and sandalwood. A mysterious evening elixir.</p>
-                            <button class="cta-button" style="margin-top: 1rem; padding: 0.8rem 2rem;">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card fade-in">
-                    <div class="product-container">
-                        <div class="product-front">
-                            <div class="product-bottle" style="background: linear-gradient(145deg, #006400, #228B22);"></div>
-                            <h3 class="product-name">Emerald Myst</h3>
-                            <p class="product-price">$320</p>
-                        </div>
-                        <div class="product-back">
-                            <h3 class="product-name">Emerald Myst</h3>
-                            <p>Fresh green mandarin, vetiver, and oakmoss. Nature's elegant whisper.</p>
-                            <button class="cta-button" style="margin-top: 1rem; padding: 0.8rem 2rem;">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card fade-in">
-                    <div class="product-container">
-                        <div class="product-front">
-                            <div class="product-bottle" style="background: linear-gradient(145deg, #B22222, #8B0000);"></div>
-                            <h3 class="product-name">Ruby Ember</h3>
-                            <p class="product-price">$295</p>
-                        </div>
-                        <div class="product-back">
-                            <h3 class="product-name">Ruby Ember</h3>
-                            <p>Warm spices, rose otto, and amber. Passion in every drop.</p>
-                            <button class="cta-button" style="margin-top: 1rem; padding: 0.8rem 2rem;">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card fade-in">
-                    <div class="product-container">
-                        <div class="product-front">
-                            <div class="product-bottle" style="background: linear-gradient(145deg, #1E90FF, #4169E1);"></div>
-                            <h3 class="product-name">Sapphire Dawn</h3>
-                            <p class="product-price">$310</p>
-                        </div>
-                        <div class="product-back">
-                            <h3 class="product-name">Sapphire Dawn</h3>
-                            <p>Aquatic bergamot, marine notes, and white musk. Ocean's first light.</p>
-                            <button class="cta-button" style="margin-top: 1rem; padding: 0.8rem 2rem;">Add to Cart</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div>
+    <!-- Products Section -->
+    <section class="products-section" id="products">
+        <h2 class="section-title fade-in">Our Collection</h2>
+        <div class="products-grid" id="productsGrid">
+            <!-- Products will be generated by JavaScript -->
+        </div>
+    </section>
 
     <script>
-        // Custom Cursor
-        const cursor = document.querySelector('.cursor');
-        const cursorFollower = document.querySelector('.cursor-follower');
-        const cursorElements = document.querySelectorAll('.cta-button, .product-card');
+        // Product data
+        const products = [
+            { name: "Baccarat Rouge", price: "$350", desc: "Woody floral musk with saffron and jasmine.", icon: "💎" },
+            { name: "Khamra", price: "$280", desc: "Rich oriental with dates, praline and vanilla.", icon: "🌹" },
+            { name: "Libre", price: "$320", desc: "Lavender, orange blossom and vanilla.", icon: "🕊️" },
+            { name: "Dior", price: "$295", desc: "Iconic floral chypre fragrance.", icon: "🌸" },
+            { name: "Chanel No. 5", price: "$420", desc: "Timeless aldehydic floral masterpiece.", icon: "⭐" },
+            { name: "Coco Mademoiselle", price: "$380", desc: "Elegant patchouli and orange fusion.", icon: "💖" },
+            { name: "Good Girl – Carolina Herrera", price: "$310", desc: "Almond, tonka bean and tuberose.", icon: "👠" },
+            { name: "Miss Dior", price: "$290", desc: "Fresh rose and peony bouquet.", icon: "🌺" },
+            { name: "Valentino", price: " $340", desc: "Bergamot, iris and vanilla.", icon: "👑" },
+            { name: "Black Opium (YSL)", price: "$305", desc: "Coffee, vanilla and white flowers.", icon: "☕" },
+            { name: "La Vie Est Belle (Lancôme)", price: "$315", desc: "Iris, patchouli and praline.", icon: "🎀" },
+            { name: "Dior Sauvage", price: "$275", desc: "Fresh bergamot and ambroxan.", icon: "🔥" },
+            { name: "Bleu de Chanel", price: "$330", desc: "Citrus, sandalwood and cedar.", icon: "🌊" },
+            { name: "Acqua di Giò", price: "$260", desc: "Marine notes and rosemary.", icon: "🌿" },
+            { name: "Rasasi Hawas for Him", price: "$220", desc: "Aquatic bergamot and apple.", icon: "💧" },
+            { name: "One Million", price: "$285", desc: "Spicy cinnamon and leather.", icon: "💰" },
+            { name: "212", price: "$240", desc: "Green apple and ginger.", icon: "🍏" },
+            { name: "Bad Boy", price: "$265", desc: "Tonk and cocoa intensity.", icon: "😈" },
+            { name: "Jean Paul", price: "$360", desc: "Bold lavender and vanilla.", icon: "⚡" },
+            { name: "Stronger With You", price: "$290", desc: "Chestnut, vanilla and sage.", icon: "💪" }
+        ];
 
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            cursorFollower.style.left = e.clientX + 'px';
-            cursorFollower.style.top = e.clientY + 'px';
+        const sizes = ['30ml', '50ml', '100ml'];
+
+        // Generate product cards
+        function generateProducts() {
+            const grid = document.getElementById('productsGrid');
+            products.forEach((product, index) => {
+                const card = document.createElement('div');
+                card.className = 'product-card fade-in';
+                card.style.animationDelay = `${index * 0.1}s`;
+                
+                card.innerHTML = `
+                    <div class="product-image">${product.icon}</div>
+                    <h3 class="product-name">${product.name}</h3>
+                    <p class="product-description">${product.desc}</p>
+                    <div class="product-price">${product.price}</div>
+                    <div class="size-selector" data-product="${product.name}">
+                        ${sizes.map(size => 
+                            `<button class="size-btn" data-size="${size}">${size}</button>`
+                        ).join('')}
+                    </div>
+                    <button class="buy-now-btn" data-product="${product.name}">Buy Now</button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Size selector functionality
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('size-btn')) {
+                const selector = e.target.parentElement;
+                const productName = selector.dataset.product;
+                
+                // Remove active class from all size buttons
+                selector.querySelectorAll('.size-btn').forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                e.target.classList.add('active');
+                
+                // Store selected size for product
+                selector.dataset.selectedSize = e.target.dataset.size;
+            }
+            
+            if (e.target.classList.contains('buy-now-btn')) {
+                const productName = e.target.dataset.product;
+                const sizeSelector = e.target.parentElement.querySelector('.size-selector');
+                const selectedSize = sizeSelector.dataset.selectedSize || '50ml';
+                
+                const message = `Hello, I want to order ${productName} - ${selectedSize}`;
+                const whatsappUrl = `https://wa.me/201110511138?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+            }
         });
 
-        cursorElements.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursor.style.transform = 'scale(1.5)';
-                cursorFollower.style.transform = 'scale(2)';
-                cursorFollower.style.opacity = '0.6';
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
             });
-            el.addEventListener('mouseleave', () => {
-                cursor.style.transform = 'scale(1)';
-                cursorFollower.style.transform = 'scale(1)';
-                cursorFollower.style.opacity = '0.3';
+        }, observerOptions);
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
         });
 
-        // Intro Animation Sequence
-        const intro = document.getElementById('intro');
-        const bottleCap = document.getElementById('bottleCap');
-        const mistContainer = document.getElementById('mistContainer');
-        const mainContent = document.querySelector('.main-content');
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            generateProducts();
+            
+            // Observe fade-in elements
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+        });
 
-        setTimeout(() => {
-            bottleCap.classList.add('cap-open');
-        }, 2000);
-
-        // Create mist particles
-        function createMistParticle() {
-            const particle = document
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(10, 10, 10, 0.98)';
+            } else {
+                header.style.background = 'rgba(10, 10, 10, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
