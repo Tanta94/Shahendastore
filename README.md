@@ -393,126 +393,131 @@
       border-radius: 28px;
       overflow: hidden;
       margin-bottom: 22px;
-      background: radial-gradient(circle at 40% 20%, rgba(255,255,255,0.18), transparent 22%),
-                  linear-gradient(180deg, rgba(56, 54, 51, 0.16) 0%, rgba(16, 15, 15, 0.95) 100%);
+      background: radial-gradient(circle at 50% 8%, rgba(255,255,255,0.14), transparent 24%),
+                  linear-gradient(180deg, rgba(14, 13, 12, 0.96), rgba(10, 10, 10, 0.96));
       display: grid;
       place-items: center;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
     }
 
-    .visual-shape {
-      width: 72%;
-      height: 72%;
-      border-radius: 24px;
-      position: relative;
-      background: linear-gradient(145deg, rgba(216,179,72,0.18), rgba(255,221,114,0.04));
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), 0 28px 60px rgba(0,0,0,0.28);
-      overflow: hidden;
-    }
-
-    .visual-shape::before,
-    .visual-shape::after {
+    .card-visual::before {
       content: "";
       position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 15%, rgba(212,175,55,0.14), transparent 28%);
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .icon-stage {
+      position: relative;
+      width: 62%;
+      height: 74%;
+      display: grid;
+      place-items: center;
+      z-index: 1;
+    }
+
+    .icon-glow {
+      position: absolute;
+      inset: 10%;
       border-radius: 999px;
-      background: rgba(255,255,255,0.12);
-    }
-
-    .visual-shape::before {
-      width: 28%;
-      height: 22%;
-      top: 8%;
-      left: 12%;
-      filter: blur(1px);
-    }
-
-    .visual-shape::after {
-      width: 36%;
-      height: 26%;
-      bottom: 12%;
-      right: 8%;
-      filter: blur(1.5px);
+      background: radial-gradient(circle at 50% 35%, rgba(212,175,55,0.18), transparent 55%);
+      filter: blur(14px);
+      pointer-events: none;
     }
 
     .bottle {
-      position: absolute;
-      inset: 12% 16%;
+      position: relative;
+      width: 100%;
+      height: 100%;
       display: grid;
       align-items: center;
       justify-items: center;
-      transform: translateY(6%);
     }
 
-    .bottle::before,
-    .bottle::after {
-      content: "";
+    .bottle-cap {
       position: absolute;
-      border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.06));
-      filter: blur(0.5px);
-    }
-
-    .bottle::before {
-      width: 64%;
-      height: 46%;
-      top: 8%;
-      left: 18%;
-    }
-
-    .bottle::after {
-      width: 42%;
-      height: 16%;
-      bottom: 0;
-      left: 29%;
-      border-radius: 20px;
-    }
-
-    .bottle-inner {
-      position: relative;
-      width: 54%;
-      height: 52%;
-      border-radius: 30px 30px 20px 20px;
-      background: linear-gradient(180deg, rgba(212,175,55,0.22), rgba(0,0,0,0.18));
-      border: 1px solid rgba(255,255,255,0.14);
-      overflow: hidden;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
-    }
-
-    .bottle-inner::before {
-      content: "";
-      position: absolute;
-      inset: 12% 10% 22% 10%;
-      background: linear-gradient(180deg, rgba(255,255,255,0.45), rgba(255,255,255,0.06));
-      border-radius: 18px;
-      mix-blend-mode: screen;
-    }
-
-    .bottle-top {
-      position: absolute;
-      top: -10%;
-      left: 22%;
+      top: -18%;
       width: 56%;
       height: 18%;
       border-radius: 16px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.16));
-      border: 1px solid rgba(255,255,255,0.13);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+      background: linear-gradient(180deg, rgba(255,255,255,0.92), rgba(212,175,55,0.96));
+      border: 1px solid rgba(255,255,255,0.18);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+      z-index: 3;
+    }
+
+    .bottle-neck {
+      position: absolute;
+      top: -4%;
+      width: 32%;
+      height: 18%;
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(212,175,55,0.98), rgba(205,168,55,0.8));
+      border: 1px solid rgba(255,255,255,0.16);
+      z-index: 2;
+    }
+
+    .bottle-base {
+      position: relative;
+      width: 100%;
+      height: 82%;
+      border-radius: 32px 32px 24px 24px;
+      background: linear-gradient(180deg, rgba(20,18,16,0.95), rgba(40,34,28,0.98));
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 18px 36px rgba(0,0,0,0.24), inset 0 0 0 1px rgba(255,255,255,0.04);
+      overflow: hidden;
+    }
+
+    .bottle-base::before {
+      content: "";
+      position: absolute;
+      inset: 12% 12% 30% 12%;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.22), rgba(255,255,255,0.04));
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .bottle-base::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 8%;
+      width: 52%;
+      height: 16%;
+      transform: translateX(-50%);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      filter: blur(1px);
+      pointer-events: none;
     }
 
     .bottle-label {
       position: absolute;
-      bottom: 16%;
+      bottom: 14%;
       left: 50%;
       transform: translateX(-50%);
-      width: 70%;
-      height: 18%;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      display: grid;
-      place-items: center;
-      font-size: 0.72rem;
-      letter-spacing: 0.2em;
-      color: rgba(255,255,255,0.85);
+      width: 72%;
+      padding: 10px 12px;
+      border-radius: 18px;
+      background: rgba(0,0,0,0.34);
+      border: 1px solid rgba(255,255,255,0.08);
+      text-align: center;
+      color: #f9ebc8;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
+      z-index: 2;
+      line-height: 1.2;
+    }
+
+    .bottle-label strong {
+      display: block;
+      font-size: 0.9rem;
+      letter-spacing: 0.16em;
     }
 
     .card-title {
@@ -857,11 +862,16 @@
       card.className = 'card';
       card.innerHTML = `
         <div class="card-visual" aria-hidden="true">
-          <div class="visual-shape" style="background: ${getVisualGradient(index)};">
-            <div class="bottle" style="transform: translateY(0);">
-              <div class="bottle-top"></div>
-              <div class="bottle-inner"></div>
-              <div class="bottle-label">${product.name.split(' ')[0].slice(0, 6)}</div>
+          <div class="icon-stage">
+            <div class="icon-glow"></div>
+            <div class="bottle">
+              <div class="bottle-cap"></div>
+              <div class="bottle-neck"></div>
+              <div class="bottle-base" style="background: ${getVisualGradient(index)};
+                border: 1px solid rgba(255,255,255,0.12);
+                box-shadow: 0 18px 36px rgba(0,0,0,0.24), inset 0 0 0 1px rgba(255,255,255,0.04);
+              "></div>
+              <div class="bottle-label"><strong>SHAHENDA</strong>STORE</div>
             </div>
           </div>
         </div>
