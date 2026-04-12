@@ -107,10 +107,219 @@
       margin-top: 6px;
     }
 
-    .grid {
+    .toolbar {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 28px;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: center;
+      padding: 18px 24px;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.14);
+      backdrop-filter: blur(16px);
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .filter-pill {
+      padding: 10px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      cursor: pointer;
+      transition: transform var(--transition), border-color var(--transition), background var(--transition);
+      font-size: 0.95rem;
+    }
+
+    .filter-pill.active {
+      border-color: rgba(212,175,55,0.45);
+      background: rgba(212,175,55,0.16);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .contact-btn {
+      padding: 14px 22px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform var(--transition), border-color var(--transition), background var(--transition);
+      white-space: nowrap;
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(212,175,55,0.35);
+      background: rgba(255,255,255,0.08);
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      color: var(--muted);
+      text-align: center;
+      font-size: 1rem;
+      padding: 36px 0;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 50;
+      padding: 20px;
+      backdrop-filter: blur(6px);
+    }
+
+    .overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      width: min(520px, 100%);
+      border-radius: 28px;
+      background: rgba(15, 15, 15, 0.98);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 36px 90px rgba(0,0,0,0.45);
+      overflow: hidden;
+    }
+
+    .modal-header {
+      padding: 26px 28px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .modal-header h3 {
+      font-size: 1.5rem;
+      margin-bottom: 6px;
+      letter-spacing: 0.02em;
+    }
+
+    .modal-header p {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    .modal-body {
+      padding: 24px 28px 28px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .modal-body label {
+      font-size: 0.92rem;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .modal-body input,
+    .modal-body select {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--text);
+      padding: 14px 16px;
+      border-radius: 18px;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .modal-body .option-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .modal-body .option-group button {
+      flex: 1 1 calc(50% - 10px);
+      min-width: 140px;
+      padding: 14px 16px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color var(--transition), background var(--transition);
+    }
+
+    .modal-body .option-group button.active {
+      background: rgba(212,175,55,0.16);
+      border-color: rgba(212,175,55,0.45);
+      color: #fff;
+    }
+
+    .modal-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: flex-end;
+      margin-top: 6px;
+    }
+
+    .modal-actions button {
+      padding: 14px 18px;
+      border-radius: 18px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .modal-actions .cancel-btn {
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+    }
+
+    .modal-actions .complete-btn {
+      background: linear-gradient(135deg, rgba(212,175,55,0.96), rgba(255,216,121,0.86));
+      color: #09090a;
+    }
+
+    .modal-actions button:hover {
+      transform: translateY(-1px);
+    }
+
+    .modal-footer {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding: 16px 28px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 880px) {
+      body {
+        padding: 20px;
+      }
+      header {
+        padding: 24px;
+      }
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+      .modal-body .option-group button {
+        flex: 1 1 100%;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .sizes {
+        gap: 8px;
+      }
+      .sizes button {
+        flex: 1 1 46%;
+      }
     }
 
     .card {
@@ -410,37 +619,162 @@
       </div>
     </header>
 
+    <div class="toolbar">
+      <div class="filters" id="filterGroup"></div>
+      <button type="button" class="contact-btn" id="contactBtn">Contact Us</button>
+    </div>
+
     <div class="grid" id="productGrid"></div>
 
     <div class="footer-note">All products redirect to WhatsApp for a seamless luxury order experience.</div>
   </section>
 
+  <div class="overlay" id="orderOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="orderTitle">
+      <div class="modal-header">
+        <h3 id="orderTitle">Complete your order</h3>
+        <p>Finish your luxury purchase and send it instantly via WhatsApp.</p>
+      </div>
+      <div class="modal-body">
+        <div>
+          <label for="orderProduct">Product</label>
+          <input id="orderProduct" type="text" readonly />
+        </div>
+        <div>
+          <label for="orderSize">Size</label>
+          <input id="orderSize" type="text" readonly />
+        </div>
+        <div>
+          <label for="orderPrice">Price</label>
+          <input id="orderPrice" type="text" readonly />
+        </div>
+        <div>
+          <label for="orderAddress">Delivery address</label>
+          <input id="orderAddress" type="text" placeholder="Enter your address" />
+        </div>
+        <div>
+          <label>Bottle type</label>
+          <div class="option-group" id="bottleOptions">
+            <button type="button" class="active" data-type="Original Bottle">Original Bottle</button>
+            <button type="button" data-type="Refill / Inspired Version">Refill / Inspired Version</button>
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="cancel-btn" id="cancelOrder">Cancel</button>
+          <button type="button" class="complete-btn" id="completeOrder">Complete Order</button>
+        </div>
+      </div>
+      <div class="modal-footer">Your details are used only to place the order via WhatsApp.</div>
+    </div>
+  </div>
+
   <script>
     const number = '201110511138';
+    const categories = ['All', 'Women', 'Men', 'Unisex'];
     const products = [
-      {name: 'Baccarat Rouge', price: 155, desc: 'A luminous fusion of amber and rose for a captivating evening signature.'},
-      {name: 'Khamra', price: 138, desc: 'A warm oriental creation with notes of amber, saffron, and dark florals.'},
-      {name: 'Libre', price: 142, desc: 'A bold, floral-oriental scent balancing lavender and orange blossom.'},
-      {name: 'Dior', price: 163, desc: 'An iconic fragrance with powerful depth and elegant precision.'},
-      {name: 'Chanel No. 5', price: 180, desc: 'An eternal ode to femininity with luminous aldehydes and jasmine.'},
-      {name: 'Coco Mademoiselle (Chanel)', price: 148, desc: 'A modern classic with sensual vanilla and sparkling citrus.'},
-      {name: 'Good Girl – Carolina Herrera', price: 152, desc: 'A daring blend of rose, jasmine, and dark tonka bean.'},
-      {name: 'Miss Dior', price: 140, desc: 'A romantic floral statement refined with patchouli and sweetness.'},
-      {name: 'Valentino', price: 146, desc: 'A luxurious oriental spicy fragrance with velvet petals and woods.'},
-      {name: 'Black Opium (YSL)', price: 147, desc: 'A seductive coffee-floral fragrance with addictive gourmand accents.'},
-      {name: 'La Vie Est Belle (Lancôme)', price: 139, desc: 'A luminous, elegant blend of iris, patchouli, and praline.'},
-      {name: 'Dior Sauvage', price: 149, desc: 'A fresh, rugged scent charged with bergamot and spicy amberwood.'},
-      {name: 'Bleu de Chanel', price: 150, desc: 'A refined woody aromatic scent crafted for modern confidence.'},
-      {name: 'Acqua di Giò', price: 132, desc: 'A breezy aquatic masterpiece radiating Mediterranean freshness.'},
-      {name: 'Rasasi Hawas for Him', price: 128, desc: 'A bold blend of citrus, spices, and exotic woods for striking charm.'},
-      {name: 'One Million', price: 131, desc: 'A lavish, spicy-golden fragrance with leather and amber allure.'},
-      {name: '212', price: 124, desc: 'A sleek urban aroma that balances freshness with city energy.'},
-      {name: 'Bad Boy', price: 133, desc: 'A dark, striking scent built with black and white pepper and tonka.'},
-      {name: 'Jean Paul', price: 129, desc: 'A charismatic fragrance with cedarwood, orange blossom and woods.'},
-      {name: 'Stronger With You', price: 136, desc: 'A warm, intimate blend of vanilla, chestnut, and spicy lavender.'}
+      {name: 'Baccarat Rouge', price: 1550, category: 'Unisex', desc: 'A luminous fusion of amber and rose for a captivating evening signature.'},
+      {name: 'Khamra', price: 1380, category: 'Women', desc: 'A warm oriental creation with notes of amber, saffron, and dark florals.'},
+      {name: 'Libre', price: 1420, category: 'Women', desc: 'A bold, floral-oriental scent balancing lavender and orange blossom.'},
+      {name: 'Dior', price: 1630, category: 'Unisex', desc: 'An iconic fragrance with powerful depth and elegant precision.'},
+      {name: 'Chanel No. 5', price: 1800, category: 'Women', desc: 'An eternal ode to femininity with luminous aldehydes and jasmine.'},
+      {name: 'Coco Mademoiselle (Chanel)', price: 1480, category: 'Women', desc: 'A modern classic with sensual vanilla and sparkling citrus.'},
+      {name: 'Good Girl – Carolina Herrera', price: 1520, category: 'Women', desc: 'A daring blend of rose, jasmine, and dark tonka bean.'},
+      {name: 'Miss Dior', price: 1400, category: 'Women', desc: 'A romantic floral statement refined with patchouli and sweetness.'},
+      {name: 'Valentino', price: 1460, category: 'Women', desc: 'A luxurious oriental spicy fragrance with velvet petals and woods.'},
+      {name: 'Black Opium (YSL)', price: 1470, category: 'Women', desc: 'A seductive coffee-floral fragrance with addictive gourmand accents.'},
+      {name: 'La Vie Est Belle (Lancôme)', price: 1390, category: 'Women', desc: 'A luminous, elegant blend of iris, patchouli, and praline.'},
+      {name: 'Dior Sauvage', price: 1490, category: 'Men', desc: 'A fresh, rugged scent charged with bergamot and spicy amberwood.'},
+      {name: 'Bleu de Chanel', price: 1500, category: 'Men', desc: 'A refined woody aromatic scent crafted for modern confidence.'},
+      {name: 'Acqua di Giò', price: 1320, category: 'Men', desc: 'A breezy aquatic masterpiece radiating Mediterranean freshness.'},
+      {name: 'Rasasi Hawas for Him', price: 1280, category: 'Men', desc: 'A bold blend of citrus, spices, and exotic woods for striking charm.'},
+      {name: 'One Million', price: 1310, category: 'Men', desc: 'A lavish, spicy-golden fragrance with leather and amber allure.'},
+      {name: '212', price: 1240, category: 'Men', desc: 'A sleek urban aroma that balances freshness with city energy.'},
+      {name: 'Bad Boy', price: 1330, category: 'Men', desc: 'A dark, striking scent built with black and white pepper and tonka.'},
+      {name: 'Jean Paul', price: 1290, category: 'Men', desc: 'A charismatic fragrance with cedarwood, orange blossom and woods.'},
+      {name: 'Stronger With You', price: 1360, category: 'Men', desc: 'A warm, intimate blend of vanilla, chestnut, and spicy lavender.'}
     ];
 
     const grid = document.getElementById('productGrid');
+    const filterGroup = document.getElementById('filterGroup');
+    const contactBtn = document.getElementById('contactBtn');
+    const overlay = document.getElementById('orderOverlay');
+    const orderProduct = document.getElementById('orderProduct');
+    const orderSize = document.getElementById('orderSize');
+    const orderPrice = document.getElementById('orderPrice');
+    const orderAddress = document.getElementById('orderAddress');
+    const bottleOptions = document.getElementById('bottleOptions');
+    const cancelOrder = document.getElementById('cancelOrder');
+    const completeOrder = document.getElementById('completeOrder');
+
+    let activeCategory = 'All';
+    let activeProduct = null;
+    let activeSize = '50ml';
+    let activeBottleType = 'Original Bottle';
+
+    function formatPrice(value) {
+      return `EGP ${value.toLocaleString('en-US')}`;
+    }
+
+    function getVisualGradient(index) {
+      const palettes = [
+        'linear-gradient(145deg, rgba(212,175,55,0.26), rgba(30,26,22,0.16))',
+        'linear-gradient(145deg, rgba(255,223,138,0.2), rgba(19,18,18,0.2))',
+        'linear-gradient(145deg, rgba(238,210,140,0.16), rgba(12,12,12,0.18))',
+        'linear-gradient(145deg, rgba(215,175,60,0.24), rgba(15,15,15,0.18))'
+      ];
+      return palettes[index % palettes.length];
+    }
+
+    function renderFilters() {
+      filterGroup.innerHTML = '';
+      categories.forEach((category) => {
+        const pill = document.createElement('button');
+        pill.type = 'button';
+        pill.textContent = category;
+        pill.className = `filter-pill${category === activeCategory ? ' active' : ''}`;
+        pill.addEventListener('click', () => {
+          if (activeCategory === category) return;
+          activeCategory = category;
+          filterProducts(category);
+        });
+        filterGroup.appendChild(pill);
+      });
+    }
+
+    function filterProducts(category) {
+      activeCategory = category;
+      renderFilters();
+      const filtered = category === 'All' ? products : products.filter((product) => product.category === category);
+      grid.innerHTML = '';
+      if (!filtered.length) {
+        const message = document.createElement('p');
+        message.className = 'empty-state';
+        message.textContent = 'No fragrances found for this category yet.';
+        grid.appendChild(message);
+        return;
+      }
+      filtered.forEach((product, index) => grid.appendChild(createCard(product, index)));
+    }
+
+    function openOrderModal(product, size, price) {
+      activeProduct = product;
+      activeSize = size;
+      orderProduct.value = product;
+      orderSize.value = size;
+      orderPrice.value = formatPrice(price);
+      orderAddress.value = '';
+      activeBottleType = 'Original Bottle';
+      bottleOptions.querySelectorAll('button').forEach((button) => {
+        button.classList.toggle('active', button.dataset.type === activeBottleType);
+      });
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeModal() {
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+    }
 
     function createCard(product, index) {
       const sizes = ['30ml', '50ml', '100ml'];
@@ -449,20 +783,20 @@
       card.className = 'card';
       card.innerHTML = `
         <div class="card-visual" aria-hidden="true">
-          <div class="visual-shape" style="background: linear-gradient(145deg, rgba(212,175,55,0.2), rgba(255,255,255,0.03)), radial-gradient(circle at top left, rgba(255,255,255,0.12), transparent 18%);">
+          <div class="visual-shape" style="background: ${getVisualGradient(index)};">
             <div class="bottle" style="transform: translateY(0);">
               <div class="bottle-top"></div>
               <div class="bottle-inner"></div>
-              <div class="bottle-label">${product.name.split(' ')[0].slice(0,6)}</div>
+              <div class="bottle-label">${product.name.split(' ')[0].slice(0, 6)}</div>
             </div>
           </div>
         </div>
         <div class="card-body">
           <h2 class="card-title">${product.name}</h2>
           <p class="card-subtitle">${product.desc}</p>
-          <div class="price"><span>$${product.price}</span><small>starting price</small></div>
+          <div class="price"><span>${formatPrice(product.price)}</span><small>price in EGP</small></div>
           <div class="sizes" role="radiogroup" aria-label="Size selector for ${product.name}"></div>
-          <a class="buy" href="#" data-product="${encodeURIComponent(product.name)}" data-size="${defaultSize}">Buy Now</a>
+          <a class="buy" href="#" data-product="${encodeURIComponent(product.name)}" data-size="${defaultSize}" data-price="${product.price}">Buy Now</a>
         </div>
       `;
 
@@ -487,16 +821,44 @@
         event.preventDefault();
         const productName = decodeURIComponent(buyButton.dataset.product);
         const size = buyButton.dataset.size;
-        const message = `Hello, I want to order ${productName} - ${size}`;
-        const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
-        window.open(url, '_blank');
+        const price = parseInt(buyButton.dataset.price, 10);
+        openOrderModal(productName, size, price);
       });
 
       return card;
     }
 
-    products.forEach((product, index) => {
-      grid.appendChild(createCard(product, index));
+    function sendWhatsAppOrder() {
+      const address = orderAddress.value.trim();
+      if (!address) {
+        orderAddress.focus();
+        orderAddress.style.borderColor = 'rgba(212,175,55,0.7)';
+        return;
+      }
+      const message = `Hello, I want to order ${activeProduct} - ${activeSize} - ${activeBottleType} - Address: ${address} - Price: ${formatPrice(products.find((item) => item.name === activeProduct).price)}`;
+      const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+      window.open(url, '_blank');
+      closeModal();
+    }
+
+    renderFilters();
+    filterProducts(activeCategory);
+
+    contactBtn.addEventListener('click', () => {
+      window.open(`https://wa.me/${number}`, '_blank');
+    });
+
+    bottleOptions.addEventListener('click', (event) => {
+      if (event.target.tagName !== 'BUTTON') return;
+      bottleOptions.querySelectorAll('button').forEach((button) => button.classList.remove('active'));
+      event.target.classList.add('active');
+      activeBottleType = event.target.dataset.type;
+    });
+
+    cancelOrder.addEventListener('click', closeModal);
+    completeOrder.addEventListener('click', sendWhatsAppOrder);
+    overlay.addEventListener('click', (event) => {
+      if (event.target === overlay) closeModal();
     });
   </script>
 </body>
