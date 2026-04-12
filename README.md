@@ -260,6 +260,38 @@
       color: #fff;
     }
 
+    .discount-block {
+      display: grid;
+      gap: 10px;
+    }
+
+    .pricing-summary {
+      display: grid;
+      gap: 8px;
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .pricing-summary span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .old-price {
+      color: rgba(255,255,255,0.75);
+      text-decoration: line-through;
+      font-size: 0.95rem;
+    }
+
+    .new-price {
+      color: #fff;
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+
     .modal-actions {
       display: flex;
       flex-wrap: wrap;
@@ -656,7 +688,17 @@
           <label>Bottle type</label>
           <div class="option-group" id="bottleOptions">
             <button type="button" class="active" data-type="Original Bottle">Original Bottle</button>
-            <button type="button" data-type="Refill / Inspired Version">Refill / Inspired Version</button>
+            <button type="button" data-type="Refill / Inspired Version">Refill / Inspired</button>
+          </div>
+        </div>
+        <div class="discount-block">
+          <div>
+            <label for="discountCode">Enter Discount Code</label>
+            <input id="discountCode" type="text" placeholder="Enter discount code" autocomplete="off" />
+          </div>
+          <div class="pricing-summary">
+            <span class="old-price" id="orderOldPrice"></span>
+            <span class="new-price" id="orderNewPrice"></span>
           </div>
         </div>
         <div class="modal-actions">
@@ -701,15 +743,26 @@
     const orderProduct = document.getElementById('orderProduct');
     const orderSize = document.getElementById('orderSize');
     const orderPrice = document.getElementById('orderPrice');
+    const orderOldPrice = document.getElementById('orderOldPrice');
+    const orderNewPrice = document.getElementById('orderNewPrice');
     const orderAddress = document.getElementById('orderAddress');
+    const discountCodeInput = document.getElementById('discountCode');
     const bottleOptions = document.getElementById('bottleOptions');
     const cancelOrder = document.getElementById('cancelOrder');
     const completeOrder = document.getElementById('completeOrder');
+
+    const sizeMultipliers = {
+      '30ml': 0.75,
+      '50ml': 1,
+      '100ml': 1.8
+    };
 
     let activeCategory = 'All';
     let activeProduct = null;
     let activeSize = '50ml';
     let activeBottleType = 'Original Bottle';
+    let activePrice = 0;
+    let activeDiscountCode = '';
 
     function formatPrice(value) {
       return `EGP ${value.toLocaleString('en-US')}`;
@@ -756,13 +809,34 @@
       filtered.forEach((product, index) => grid.appendChild(createCard(product, index)));
     }
 
+    function updateDiscountPreview() {
+      activeDiscountCode = discountCodeInput.value.trim();
+      const discountApplied = activeDiscountCode.toLowerCase() === 'sosha';
+      const finalValue = discountApplied ? Math.round(activePrice * 0.7) : activePrice;
+      orderOldPrice.textContent = discountApplied ? formatPrice(activePrice) : '';
+      orderNewPrice.textContent = formatPrice(finalValue);
+      orderPrice.value = formatPrice(activePrice);
+      if (discountApplied) {
+        orderOldPrice.style.display = 'block';
+      } else {
+        orderOldPrice.style.display = 'none';
+      }
+    }
+
     function openOrderModal(product, size, price) {
       activeProduct = product;
       activeSize = size;
+      activePrice = price;
+      activeDiscountCode = '';
       orderProduct.value = product;
       orderSize.value = size;
       orderPrice.value = formatPrice(price);
+      orderOldPrice.textContent = '';
+      orderOldPrice.style.display = 'none';
+      orderNewPrice.textContent = formatPrice(price);
       orderAddress.value = '';
+      orderAddress.style.borderColor = 'rgba(255,255,255,0.1)';
+      discountCodeInput.value = '';
       activeBottleType = 'Original Bottle';
       bottleOptions.querySelectorAll('button').forEach((button) => {
         button.classList.toggle('active', button.dataset.type === activeBottleType);
@@ -794,9 +868,9 @@
         <div class="card-body">
           <h2 class="card-title">${product.name}</h2>
           <p class="card-subtitle">${product.desc}</p>
-          <div class="price"><span>${formatPrice(product.price)}</span><small>price in EGP</small></div>
+          <div class="price"><span>${formatPrice(product.price)}</span><small>starting price in EGP</small></div>
           <div class="sizes" role="radiogroup" aria-label="Size selector for ${product.name}"></div>
-          <a class="buy" href="#" data-product="${encodeURIComponent(product.name)}" data-size="${defaultSize}" data-price="${product.price}">Buy Now</a>
+          <a class="buy" href="#" data-product="${encodeURIComponent(product.name)}" data-size="${defaultSize}" data-price="${Math.round(product.price * sizeMultipliers[defaultSize])}">Buy Now</a>
         </div>
       `;
 
@@ -812,6 +886,7 @@
           button.classList.add('active');
           const buyLink = card.querySelector('.buy');
           buyLink.dataset.size = size;
+          buyLink.dataset.price = Math.round(product.price * sizeMultipliers[size]);
         });
         sizeContainer.appendChild(button);
       });
@@ -828,6 +903,11 @@
       return card;
     }
 
+    function calculateFinalPrice() {
+      const discountApplied = activeDiscountCode.toLowerCase() === 'sosha';
+      return discountApplied ? Math.round(activePrice * 0.7) : activePrice;
+    }
+
     function sendWhatsAppOrder() {
       const address = orderAddress.value.trim();
       if (!address) {
@@ -835,17 +915,26 @@
         orderAddress.style.borderColor = 'rgba(212,175,55,0.7)';
         return;
       }
-      const message = `Hello, I want to order ${activeProduct} - ${activeSize} - ${activeBottleType} - Address: ${address} - Price: ${formatPrice(products.find((item) => item.name === activeProduct).price)}`;
+      activeDiscountCode = discountCodeInput.value.trim();
+      const finalPrice = calculateFinalPrice();
+      const discountText = activeDiscountCode ? activeDiscountCode : 'None';
+      const message = `Hello, I want to order ${activeProduct} - ${activeSize} - ${activeBottleType} - Address: ${address} - Discount: ${discountText} - Final Price: ${formatPrice(finalPrice)}`;
       const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
       window.open(url, '_blank');
       closeModal();
     }
+
+    discountCodeInput.addEventListener('input', updateDiscountPreview);
 
     renderFilters();
     filterProducts(activeCategory);
 
     contactBtn.addEventListener('click', () => {
       window.open(`https://wa.me/${number}`, '_blank');
+    });
+
+    orderAddress.addEventListener('input', () => {
+      orderAddress.style.borderColor = 'rgba(255,255,255,0.1)';
     });
 
     bottleOptions.addEventListener('click', (event) => {
