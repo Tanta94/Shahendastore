@@ -46,17 +46,194 @@
       gap: 32px;
     }
 
-    header {
+    .site-header {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
+      padding: 24px 32px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      gap: 16px;
+      position: sticky;
+      top: 0;
+      background: rgba(7,7,7,0.94);
+      backdrop-filter: blur(14px);
+      z-index: 30;
+    }
+
+    .site-header .brand-name {
+      letter-spacing: 0.26em;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 1.05rem;
+      text-transform: uppercase;
+    }
+
+    .site-header nav {
+      display: flex;
+      gap: 26px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .site-header nav a {
+      color: rgba(255,255,255,0.78);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      transition: color var(--transition);
+    }
+
+    .site-header nav a:hover {
+      color: #fff;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(420px, 1fr);
+      gap: 48px;
+      align-items: center;
+      min-height: 560px;
+      padding: 36px 0;
+    }
+
+    .hero-copy {
+      display: grid;
       gap: 24px;
-      padding: 28px 32px;
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: var(--radius);
-      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
+    }
+
+    .hero-copy .eyebrow {
+      color: var(--accent);
+      letter-spacing: 0.28em;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(3rem, 5vw, 5.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      max-width: 12ch;
+    }
+
+    .hero-copy p {
+      color: var(--muted);
+      max-width: 36rem;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .hero-button {
+      border: none;
+      cursor: pointer;
+      padding: 16px 28px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.96), rgba(255,216,121,0.86));
+      color: #09090a;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .hero-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 40px rgba(212,175,55,0.24);
+    }
+
+    .hero-link {
+      color: var(--text);
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(212,175,55,0.16);
+      padding-bottom: 2px;
+    }
+
+    .hero-actions a {
+      align-self: center;
+    }
+
+    .hero-art {
+      display: grid;
+      place-items: center;
+      min-height: 500px;
+      position: relative;
+    }
+
+    .hero-art::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 32px;
+      background: radial-gradient(circle at 50% 35%, rgba(212,175,55,0.12), transparent 28%);
+      pointer-events: none;
+    }
+
+    .hero-art .card-visual {
+      width: 100%;
+      max-width: 520px;
+      min-height: 620px;
+      border-radius: 36px;
+      background: linear-gradient(180deg, rgba(14, 13, 12, 1), rgba(7, 7, 7, 1));
+      box-shadow: 0 48px 120px rgba(0,0,0,0.42);
+    }
+
+    .hero-art .icon-stage {
+      width: 72%;
+      height: 82%;
+    }
+
+    .hero-art .bottle-cap,
+    .hero-art .bottle-neck,
+    .hero-art .bottle-base {
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .hero-art:hover .bottle-cap {
+      transform: translateY(-4px);
+    }
+
+    .hero-art:hover .bottle-base {
+      transform: translateY(-3px);
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+      .hero-art {
+        min-height: 420px;
+      }
+      .hero-art .card-visual {
+        min-height: 520px;
+      }
+    }
+
+    @media (max-width: 720px) {
+      body {
+        padding: 20px;
+      }
+      .page {
+        gap: 24px;
+      }
+      .site-header {
+        padding: 18px 20px;
+      }
+      .hero {
+        gap: 24px;
+      }
+      .hero-copy h1 {
+        font-size: 3.5rem;
+      }
     }
 
     .brand {
@@ -634,27 +811,52 @@
 </head>
 <body>
   <section class="page">
-    <header>
-      <div class="brand">
-        <p style="letter-spacing: 0.24em; color: var(--accent); text-transform: uppercase; font-weight: 700;">Shahenda Store</p>
-        <h1>Luxury perfume, designed for every moment.</h1>
-        <p>Discover a premium collection of iconic scents crafted to feel intimate, bold, and unforgettable. Each product is presented with a refined, modern aesthetic that embodies elegance.</p>
-      </div>
-      <div class="kpi">
-        <div class="kpi-item">
-          <span>20</span>
-          <small>Curated scents</small>
-        </div>
-        <div class="kpi-item">
-          <span>24/7</span>
-          <small>Quick WhatsApp orders</small>
-        </div>
-        <div class="kpi-item">
-          <span>100%</span>
-          <small>Premium packaging</small>
-        </div>
-      </div>
+    <header class="site-header">
+      <div class="brand-name">Shahenda Store</div>
+      <nav>
+        <a href="#productGrid">Products</a>
+        <a href="https://wa.me/201110511138" target="_blank">WhatsApp</a>
+      </nav>
     </header>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Premium perfumes</p>
+        <h1>Luxury scents, clean shopping, instant WhatsApp orders.</h1>
+        <p>Explore Shahenda Store’s curated perfume collection in 30ml, 50ml, and 100ml sizes. Choose your favorite scent and order directly in one click.</p>
+        <div class="hero-actions">
+          <button class="hero-button" id="heroShopBtn">Shop Perfumes</button>
+          <a class="hero-link" href="https://wa.me/201110511138" target="_blank">WhatsApp</a>
+        </div>
+        <div class="kpi">
+          <div class="kpi-item">
+            <span>20</span>
+            <small>Curated scents</small>
+          </div>
+          <div class="kpi-item">
+            <span>24/7</span>
+            <small>Quick WhatsApp orders</small>
+          </div>
+          <div class="kpi-item">
+            <span>100%</span>
+            <small>Premium packaging</small>
+          </div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="card-visual" aria-hidden="true">
+          <div class="icon-stage">
+            <div class="icon-glow"></div>
+            <div class="bottle">
+              <div class="bottle-cap"></div>
+              <div class="bottle-neck"></div>
+              <div class="bottle-base" style="background: linear-gradient(145deg, rgba(212,175,55,0.26), rgba(30,26,22,0.16)); border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 18px 36px rgba(0,0,0,0.24), inset 0 0 0 1px rgba(255,255,255,0.04);"></div>
+              <div class="bottle-label"><strong>SHAHENDA</strong>STORE</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <div class="toolbar">
       <div class="filters" id="filterGroup"></div>
@@ -941,6 +1143,10 @@
 
     contactBtn.addEventListener('click', () => {
       window.open(`https://wa.me/${number}`, '_blank');
+    });
+
+    document.getElementById('heroShopBtn').addEventListener('click', () => {
+      document.getElementById('productGrid').scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
 
     orderAddress.addEventListener('input', () => {
