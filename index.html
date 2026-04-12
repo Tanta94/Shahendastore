@@ -930,7 +930,7 @@
   <script>
     const number = '201110511138';
     const categories = ['All', 'Women', 'Men', 'Unisex'];
-    const defaultProductImage = 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=900&q=80';
+    const defaultProductImage = 'perfume-bottle.svg';
     const products = [
       {name: 'Baccarat Rouge', price: 1550, category: 'Unisex', desc: 'A luminous fusion of amber and rose for a captivating evening signature.', image: defaultProductImage},
       {name: 'Khamra', price: 1380, category: 'Women', desc: 'A warm oriental creation with notes of amber, saffron, and dark florals.', image: 'https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=900&q=80'},
@@ -953,6 +953,7 @@
       {name: 'Jean Paul', price: 1290, category: 'Men', desc: 'A charismatic fragrance with cedarwood, orange blossom and woods.', image: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80'},
       {name: 'Stronger With You', price: 1360, category: 'Men', desc: 'A warm, intimate blend of vanilla, chestnut, and spicy lavender.', image: 'https://images.unsplash.com/photo-1493666438817-866a91353ca9?auto=format&fit=crop&w=900&q=80'}
     ];
+    products.forEach((product) => product.image = defaultProductImage);
 
     const grid = document.getElementById('productGrid');
     const filterGroup = document.getElementById('filterGroup');
