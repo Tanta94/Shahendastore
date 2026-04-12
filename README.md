@@ -1,234 +1,503 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shahenda Store</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shahenda Store</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #070707;
+      --panel: rgba(20, 20, 20, 0.94);
+      --panel-soft: rgba(255, 255, 255, 0.05);
+      --text: #f5f2ed;
+      --muted: #b5aca2;
+      --accent: #d4af37;
+      --accent-soft: rgba(212, 175, 55, 0.15);
+      --shadow: 0 28px 80px rgba(0, 0, 0, 0.24);
+      --radius: 28px;
+      --transition: 260ms ease;
+    }
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
+    html, body {
+      min-height: 100%;
+      background: radial-gradient(circle at top left, rgba(212, 175, 55, 0.12), transparent 24%),
+                  radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.05), transparent 20%),
+                  var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
 
-body{
-font-family:Inter;
-background:#070707;
-color:#fff;
-overflow-x:hidden;
-}
+    body {
+      padding: 32px;
+    }
 
-/* HERO */
-.hero{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:100px;
-min-height:100vh;
-background:radial-gradient(circle at top,#1a1408,#000);
-}
+    .page {
+      max-width: 1320px;
+      margin: 0 auto;
+      display: grid;
+      gap: 32px;
+    }
 
-.hero h1{
-font-family:Playfair Display;
-font-size:80px;
-line-height:1.1;
-font-weight:700;
-background:linear-gradient(90deg,#ffd700,#fff);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-animation:fadeIn 1.5s ease;
-}
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      padding: 28px 32px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
 
-.hero p{
-max-width:420px;
-opacity:0.7;
-margin-top:20px;
-}
+    .brand {
+      display: grid;
+      gap: 14px;
+      max-width: 560px;
+    }
 
-.glass-bottle{
-width:340px;
-height:450px;
-border-radius:35px;
-background:linear-gradient(145deg,#111,#222);
-border:1px solid rgba(255,215,0,0.3);
-box-shadow:0 0 120px rgba(255,215,0,0.15);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:60px;
-animation:float 4s ease-in-out infinite;
-}
+    .brand h1 {
+      font-size: clamp(2.5rem, 4vw, 4rem);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
 
-/* FILTERS */
-.filters{
-display:flex;
-gap:15px;
-padding:20px 100px;
-}
+    .brand p {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 38rem;
+    }
 
-.filters button{
-padding:10px 20px;
-border:1px solid rgba(255,215,0,0.3);
-background:transparent;
-color:#fff;
-border-radius:25px;
-cursor:pointer;
-transition:0.3s;
-}
+    .kpi {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
 
-.filters button:hover,
-.filters button.active{
-background:#ffd700;
-color:#000;
-transform:scale(1.05);
-}
+    .kpi-item {
+      min-width: 170px;
+      padding: 18px 22px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      text-align: left;
+    }
 
-/* GRID */
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-gap:30px;
-padding:50px 100px;
-}
+    .kpi-item span {
+      display: block;
+      font-size: 1.85rem;
+      color: var(--accent);
+      font-weight: 700;
+    }
 
-.card{
-background:linear-gradient(145deg,#111,#0c0c0c);
-border-radius:25px;
-padding:20px;
-border:1px solid rgba(255,215,0,0.1);
-transition:0.4s;
-position:relative;
-overflow:hidden;
-}
+    .kpi-item small {
+      color: var(--muted);
+      font-size: 0.95rem;
+      display: block;
+      margin-top: 6px;
+    }
 
-.card:hover{
-transform:translateY(-12px);
-border-color:rgba(255,215,0,0.4);
-box-shadow:0 30px 60px rgba(0,0,0,0.6);
-}
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
 
-.img{
-height:230px;
-border-radius:20px;
-overflow:hidden;
-background:#1a1a1a;
-}
+    .card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 32px;
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 26px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      box-shadow: var(--shadow);
+      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+    }
 
-.img img{
-width:100%;
-height:100%;
-object-fit:cover;
-transition:0.5s;
-}
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(212,175,55,0.35);
+      box-shadow: 0 36px 90px rgba(0,0,0,0.32);
+    }
 
-.card:hover img{
-transform:scale(1.1);
-}
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at top right, rgba(212,175,55,0.08), transparent 28%),
+                  radial-gradient(circle at bottom left, rgba(255,255,255,0.06), transparent 18%);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
 
-h3{
-margin-top:15px;
-font-family:Playfair Display;
-font-size:22px;
-}
+    .card:hover::before {
+      opacity: 1;
+    }
 
-.price{
-color:#ffd700;
-margin-top:5px;
-font-weight:600;
-}
+    .card-visual {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: 28px;
+      overflow: hidden;
+      margin-bottom: 22px;
+      background: radial-gradient(circle at 40% 20%, rgba(255,255,255,0.18), transparent 22%),
+                  linear-gradient(180deg, rgba(56, 54, 51, 0.16) 0%, rgba(16, 15, 15, 0.95) 100%);
+      display: grid;
+      place-items: center;
+    }
 
-.buy{
-width:100%;
-margin-top:15px;
-padding:12px;
-border:none;
-border-radius:12px;
-cursor:pointer;
-font-weight:bold;
-background:linear-gradient(90deg,#ffd700,#ffed4e);
-transition:0.3s;
-}
+    .visual-shape {
+      width: 72%;
+      height: 72%;
+      border-radius: 24px;
+      position: relative;
+      background: linear-gradient(145deg, rgba(216,179,72,0.18), rgba(255,221,114,0.04));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08), 0 28px 60px rgba(0,0,0,0.28);
+      overflow: hidden;
+    }
 
-.buy:hover{
-transform:scale(1.05);
-}
+    .visual-shape::before,
+    .visual-shape::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+    }
 
-/* ANIMATIONS */
-@keyframes float{
-0%,100%{transform:translateY(0);}
-50%{transform:translateY(-20px);}
-}
+    .visual-shape::before {
+      width: 28%;
+      height: 22%;
+      top: 8%;
+      left: 12%;
+      filter: blur(1px);
+    }
 
-@keyframes fadeIn{
-from{opacity:0;transform:translateY(40px);}
-to{opacity:1;transform:translateY(0);}
-}
-</style>
+    .visual-shape::after {
+      width: 36%;
+      height: 26%;
+      bottom: 12%;
+      right: 8%;
+      filter: blur(1.5px);
+    }
+
+    .bottle {
+      position: absolute;
+      inset: 12% 16%;
+      display: grid;
+      align-items: center;
+      justify-items: center;
+      transform: translateY(6%);
+    }
+
+    .bottle::before,
+    .bottle::after {
+      content: "";
+      position: absolute;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255,255,255,0.06));
+      filter: blur(0.5px);
+    }
+
+    .bottle::before {
+      width: 64%;
+      height: 46%;
+      top: 8%;
+      left: 18%;
+    }
+
+    .bottle::after {
+      width: 42%;
+      height: 16%;
+      bottom: 0;
+      left: 29%;
+      border-radius: 20px;
+    }
+
+    .bottle-inner {
+      position: relative;
+      width: 54%;
+      height: 52%;
+      border-radius: 30px 30px 20px 20px;
+      background: linear-gradient(180deg, rgba(212,175,55,0.22), rgba(0,0,0,0.18));
+      border: 1px solid rgba(255,255,255,0.14);
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
+    }
+
+    .bottle-inner::before {
+      content: "";
+      position: absolute;
+      inset: 12% 10% 22% 10%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.45), rgba(255,255,255,0.06));
+      border-radius: 18px;
+      mix-blend-mode: screen;
+    }
+
+    .bottle-top {
+      position: absolute;
+      top: -10%;
+      left: 22%;
+      width: 56%;
+      height: 18%;
+      border-radius: 16px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.16));
+      border: 1px solid rgba(255,255,255,0.13);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+    }
+
+    .bottle-label {
+      position: absolute;
+      bottom: 16%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70%;
+      height: 18%;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      display: grid;
+      place-items: center;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.85);
+      text-transform: uppercase;
+    }
+
+    .card-title {
+      font-size: 1.18rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .card-subtitle {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.65;
+      min-height: 3.7em;
+      margin-bottom: 18px;
+    }
+
+    .price {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 6px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .price span {
+      font-size: 1.65rem;
+      letter-spacing: 0.02em;
+    }
+
+    .price small {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .sizes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .sizes button {
+      flex: 1 1 calc(33.333% - 8px);
+      min-width: 88px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--text);
+      padding: 12px 14px;
+      border-radius: 18px;
+      cursor: pointer;
+      transition: transform var(--transition), border-color var(--transition), background var(--transition), color var(--transition);
+      font-size: 0.95rem;
+    }
+
+    .sizes button.active {
+      background: rgba(212,175,55,0.15);
+      border-color: rgba(212,175,55,0.45);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .sizes button:hover {
+      border-color: rgba(212,175,55,0.28);
+    }
+
+    .buy {
+      display: inline-flex;
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 18px;
+      border: none;
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(212,175,55,0.96), rgba(255,216,121,0.86));
+      color: #09090a;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .buy:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 38px rgba(212,175,55,0.26);
+    }
+
+    .footer-note {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.94rem;
+      padding: 14px 8px;
+    }
+
+    @media (max-width: 880px) {
+      body {
+        padding: 20px;
+      }
+      header {
+        padding: 24px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .sizes {
+        gap: 8px;
+      }
+      .sizes button {
+        flex: 1 1 46%;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <section class="page">
+    <header>
+      <div class="brand">
+        <p style="letter-spacing: 0.24em; color: var(--accent); text-transform: uppercase; font-weight: 700;">Shahenda Store</p>
+        <h1>Luxury perfume, designed for every moment.</h1>
+        <p>Discover a premium collection of iconic scents crafted to feel intimate, bold, and unforgettable. Each product is presented with a refined, modern aesthetic that embodies elegance.</p>
+      </div>
+      <div class="kpi">
+        <div class="kpi-item">
+          <span>20</span>
+          <small>Curated scents</small>
+        </div>
+        <div class="kpi-item">
+          <span>24/7</span>
+          <small>Quick WhatsApp orders</small>
+        </div>
+        <div class="kpi-item">
+          <span>100%</span>
+          <small>Premium packaging</small>
+        </div>
+      </div>
+    </header>
 
-<div class="hero">
-<div>
-<h1>Luxury scents,<br>made for you.</h1>
-<p>Premium perfumes delivered instantly via WhatsApp.</p>
-</div>
+    <div class="grid" id="productGrid"></div>
 
-<div class="glass-bottle">🖤</div>
-</div>
+    <div class="footer-note">All products redirect to WhatsApp for a seamless luxury order experience.</div>
+  </section>
 
-<div class="filters">
-<button class="active">ALL</button>
-<button>WOMEN</button>
-<button>MEN</button>
-<button>UNISEX</button>
-</div>
+  <script>
+    const number = '201110511138';
+    const products = [
+      {name: 'Baccarat Rouge', price: 155, desc: 'A luminous fusion of amber and rose for a captivating evening signature.'},
+      {name: 'Khamra', price: 138, desc: 'A warm oriental creation with notes of amber, saffron, and dark florals.'},
+      {name: 'Libre', price: 142, desc: 'A bold, floral-oriental scent balancing lavender and orange blossom.'},
+      {name: 'Dior', price: 163, desc: 'An iconic fragrance with powerful depth and elegant precision.'},
+      {name: 'Chanel No. 5', price: 180, desc: 'An eternal ode to femininity with luminous aldehydes and jasmine.'},
+      {name: 'Coco Mademoiselle (Chanel)', price: 148, desc: 'A modern classic with sensual vanilla and sparkling citrus.'},
+      {name: 'Good Girl – Carolina Herrera', price: 152, desc: 'A daring blend of rose, jasmine, and dark tonka bean.'},
+      {name: 'Miss Dior', price: 140, desc: 'A romantic floral statement refined with patchouli and sweetness.'},
+      {name: 'Valentino', price: 146, desc: 'A luxurious oriental spicy fragrance with velvet petals and woods.'},
+      {name: 'Black Opium (YSL)', price: 147, desc: 'A seductive coffee-floral fragrance with addictive gourmand accents.'},
+      {name: 'La Vie Est Belle (Lancôme)', price: 139, desc: 'A luminous, elegant blend of iris, patchouli, and praline.'},
+      {name: 'Dior Sauvage', price: 149, desc: 'A fresh, rugged scent charged with bergamot and spicy amberwood.'},
+      {name: 'Bleu de Chanel', price: 150, desc: 'A refined woody aromatic scent crafted for modern confidence.'},
+      {name: 'Acqua di Giò', price: 132, desc: 'A breezy aquatic masterpiece radiating Mediterranean freshness.'},
+      {name: 'Rasasi Hawas for Him', price: 128, desc: 'A bold blend of citrus, spices, and exotic woods for striking charm.'},
+      {name: 'One Million', price: 131, desc: 'A lavish, spicy-golden fragrance with leather and amber allure.'},
+      {name: '212', price: 124, desc: 'A sleek urban aroma that balances freshness with city energy.'},
+      {name: 'Bad Boy', price: 133, desc: 'A dark, striking scent built with black and white pepper and tonka.'},
+      {name: 'Jean Paul', price: 129, desc: 'A charismatic fragrance with cedarwood, orange blossom and woods.'},
+      {name: 'Stronger With You', price: 136, desc: 'A warm, intimate blend of vanilla, chestnut, and spicy lavender.'}
+    ];
 
-<div class="grid" id="grid"></div>
+    const grid = document.getElementById('productGrid');
 
-<script>
+    function createCard(product, index) {
+      const sizes = ['30ml', '50ml', '100ml'];
+      const defaultSize = '50ml';
+      const card = document.createElement('article');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="card-visual" aria-hidden="true">
+          <div class="visual-shape" style="background: linear-gradient(145deg, rgba(212,175,55,0.2), rgba(255,255,255,0.03)), radial-gradient(circle at top left, rgba(255,255,255,0.12), transparent 18%);">
+            <div class="bottle" style="transform: translateY(0);">
+              <div class="bottle-top"></div>
+              <div class="bottle-inner"></div>
+              <div class="bottle-label">${product.name.split(' ')[0].slice(0,6)}</div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <h2 class="card-title">${product.name}</h2>
+          <p class="card-subtitle">${product.desc}</p>
+          <div class="price"><span>$${product.price}</span><small>starting price</small></div>
+          <div class="sizes" role="radiogroup" aria-label="Size selector for ${product.name}"></div>
+          <a class="buy" href="#" data-product="${encodeURIComponent(product.name)}" data-size="${defaultSize}">Buy Now</a>
+        </div>
+      `;
 
-const products = [
-{name:"Baccarat Rouge",price:"1,650 EGP",img:"https://source.unsplash.com/500x600/?luxury,perfume"},
-{name:"Khamra",price:"950 EGP",img:"https://source.unsplash.com/500x600/?arabic,perfume"},
-{name:"Libre",price:"1,450 EGP",img:"https://source.unsplash.com/500x600/?perfume,bottle"},
-{name:"Dior Sauvage",price:"1,550 EGP",img:"https://source.unsplash.com/500x600/?dior,perfume"},
-{name:"Chanel No.5",price:"1,700 EGP",img:"https://source.unsplash.com/500x600/?chanel,perfume"},
-{name:"Miss Dior",price:"1,300 EGP",img:"https://source.unsplash.com/500x600/?rose,perfume"},
-{name:"Black Opium",price:"1,400 EGP",img:"https://source.unsplash.com/500x600/?black,perfume"},
-{name:"One Million",price:"1,200 EGP",img:"https://source.unsplash.com/500x600/?gold,perfume"}
-];
+      const sizeContainer = card.querySelector('.sizes');
+      sizes.forEach((size) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = size;
+        button.dataset.size = size;
+        button.className = size === defaultSize ? 'active' : '';
+        button.addEventListener('click', () => {
+          card.querySelectorAll('.sizes button').forEach((btn) => btn.classList.remove('active'));
+          button.classList.add('active');
+          const buyLink = card.querySelector('.buy');
+          buyLink.dataset.size = size;
+        });
+        sizeContainer.appendChild(button);
+      });
 
-function load(){
-let grid=document.getElementById("grid");
+      const buyButton = card.querySelector('.buy');
+      buyButton.addEventListener('click', (event) => {
+        event.preventDefault();
+        const productName = decodeURIComponent(buyButton.dataset.product);
+        const size = buyButton.dataset.size;
+        const message = `Hello, I want to order ${productName} - ${size}`;
+        const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+        window.open(url, '_blank');
+      });
 
-products.forEach(p=>{
-let card=document.createElement("div");
-card.className="card";
+      return card;
+    }
 
-card.innerHTML=`
-<div class="img">
-<img src="${p.img}">
-</div>
-<h3>${p.name}</h3>
-<div class="price">${p.price}</div>
-<button class="buy" onclick="order('${p.name}')">Order Now</button>
-`;
-
-grid.appendChild(card);
-});
-}
-
-function order(name){
-window.open("https://wa.me/201110511138?text=عايز اطلب "+name,"_blank");
-}
-
-load();
-
-</script>
-
+    products.forEach((product, index) => {
+      grid.appendChild(createCard(product, index));
+    });
+  </script>
 </body>
 </html>
