@@ -63,7 +63,7 @@
             </div>
             <div class="form-row">
               <label for="customer-phone">Phone Number</label>
-              <input type="tel" id="customer-phone" name="phone" placeholder="+20 111 051 1138" pattern="[0-9+\s-]{8,20}" required />
+              <input type="tel" id="customer-phone" name="phone" placeholder="+20 111 051 1138" pattern="[0-9+\- ]{8,20}" required />
             </div>
             <div class="form-row">
               <label for="customer-address">Address</label>
@@ -73,8 +73,11 @@
               <span>Total</span>
               <span class="summary-value" id="checkout-total">EGP 0.00</span>
             </div>
-            <button type="submit" class="btn btn-primary btn-wide">Place Order</button>
-            <p class="form-note">Your order will be sent securely to our Google Sheets system for processing.</p>
+            <div class="checkout-actions">
+              <button type="submit" class="btn btn-primary btn-wide">Place Order</button>
+              <button type="button" class="btn btn-secondary btn-wide" id="whatsapp-order">Order via WhatsApp</button>
+            </div>
+            <p class="form-note">If the backend fails, the order will still open in WhatsApp.</p>
           </form>
         </div>
       </section>
