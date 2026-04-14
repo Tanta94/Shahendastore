@@ -228,19 +228,27 @@ function handleCheckout(event) {
     date: new Date().toISOString(),
   };
 
+  console.log('Sending payload:', payload);
   fetch(SCRIPT_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
   })
     .then(async (response) => {
+      console.log('Response status:', response.status);
+      const text = await response.text();
+      console.log('Response text:', text);
       if (!response.ok) {
-        const text = await response.text();
-        throw new Error(`Request failed ${response.status} ${response.statusText}: ${text}`);
+        throw new Error(`HTTP ${response.status}: ${text}`);
       }
-      return response.json();
+      try {
+        return JSON.parse(text);
+      } catch (e) {
+        throw new Error(`Invalid JSON response: ${text}`);
+      }
     })
-    .then(() => {
+    .then((data) => {
+      console.log('Success response:', data);
       cart = {};
       saveCart();
       renderCart();
@@ -248,8 +256,8 @@ function handleCheckout(event) {
       alert('Thank you! Your order has been sent successfully.');
     })
     .catch((error) => {
-      console.error('Order submission error:', error);
-      alert(`Something went wrong while placing your order. Please check the console and try again.\n${error.message}`);
+      console.error('Order submission error:', error.message);
+      alert(`Error: ${error.message}`);
     });
 }
 
