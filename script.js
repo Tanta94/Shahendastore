@@ -1,4 +1,4 @@
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwNcge3xASx-0I5O0EKV6-7zXz8q-2w_Vei5JhVG5Z-F5_F_Gm8P0KNm8AE24P8KOhv/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxByHb4Jgrprc22YTVM1nqgf8tou4e8hCk2e5B05VInMiEpAUIH8KZ1gjgF9ZysmHcf/exec';
 
 const products = [
   {
