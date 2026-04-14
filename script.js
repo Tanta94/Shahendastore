@@ -1,4 +1,4 @@
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxByHb4Jgrprc22YTVM1nqgf8tou4e8hCk2e5B05VInMiEpAUIH8KZ1gjgF9ZysmHcf/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw4gMpsXZFAezXYQH5RoAZE3ZEZihZkP6d8T78Z1UKQiILP2RneO_Ek1QdDlPPSjsaE/exec';
 
 const products = [
   {
@@ -233,8 +233,11 @@ function handleCheckout(event) {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(payload),
   })
-    .then((response) => {
-      if (!response.ok) throw new Error('Unable to send order.');
+    .then(async (response) => {
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`Request failed ${response.status} ${response.statusText}: ${text}`);
+      }
       return response.json();
     })
     .then(() => {
@@ -244,8 +247,9 @@ function handleCheckout(event) {
       checkoutForm.reset();
       alert('Thank you! Your order has been sent successfully.');
     })
-    .catch(() => {
-      alert('Something went wrong while placing your order. Please try again.');
+    .catch((error) => {
+      console.error('Order submission error:', error);
+      alert(`Something went wrong while placing your order. Please check the console and try again.\n${error.message}`);
     });
 }
 
