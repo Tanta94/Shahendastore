@@ -1,7 +1,7 @@
 :root {
-  --bg: #f9f7f3;
+  --bg: #696255;
   --surface: #ffffff;
-  --surface-strong: #ece5dd;
+  --surface-strong: #120b04;
   --text: #111111;
   --muted: #6f6f6f;
   --accent: #b6916b;
@@ -346,6 +346,11 @@ textarea {
   color: var(--muted);
   font-size: 0.95rem;
   line-height: 1.65;
+}
+
+.checkout-actions {
+  display: grid;
+  gap: 0.9rem;
 }
 
 .cart-panel {
