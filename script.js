@@ -1,54 +1,28 @@
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwTabnY7LoDk_ajb6HYfuIJ5Erd2b1_cJ-J1AuVA3OP3jl4teRNcLeqy5e11_-4I2rg/exec';
+const WHATSAPP_NUMBER = '201110511138';
+const WHATSAPP_URL_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
 
 const products = [
-  {
-    id: 'shad1301',
-    category: 'women',
-    name: 'Velvet Rose Eau de Parfum',
-    price: 825,
-    discount: 18,
-    image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'shad1302',
-    category: 'men',
-    name: 'Noir Oud Signature',
-    price: 990,
-    discount: 20,
-    image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'shad1303',
-    category: 'women',
-    name: 'Amber Blossom',
-    price: 720,
-    discount: 15,
-    image: 'https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'shad1304',
-    category: 'men',
-    name: 'Cedar & Spice',
-    price: 655,
-    discount: 12,
-    image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'shad1305',
-    category: 'women',
-    name: 'Golden Musk',
-    price: 770,
-    discount: 17,
-    image: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80',
-  },
-  {
-    id: 'shad1306',
-    category: 'men',
-    name: 'Midnight Vetiver',
-    price: 845,
-    discount: 22,
-    image: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80',
-  },
+  { id: 'women01', category: 'women', name: 'كوكو مادموازيل', price: 950, discount: 15, image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80' },
+  { id: 'women02', category: 'women', name: 'شانيال نمبر 5', price: 980, discount: 12, image: 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=900&q=80' },
+  { id: 'women03', category: 'women', name: 'جود جيرل - كارولينا هيريرا', price: 920, discount: 10, image: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80' },
+  { id: 'women04', category: 'women', name: 'ميس ديور', price: 940, discount: 14, image: 'https://images.unsplash.com/photo-1515114929878-0a4ac90c7d96?auto=format&fit=crop&w=900&q=80' },
+  { id: 'women05', category: 'women', name: 'فالنتينو', price: 870, discount: 13, image: 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=900&q=80' },
+  { id: 'women06', category: 'women', name: 'بلاك اوبيوم - YSL', price: 910, discount: 16, image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80' },
+  { id: 'women07', category: 'women', name: 'لا في ايه بست ب لانكوم', price: 930, discount: 12, image: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80' },
+  { id: 'women08', category: 'women', name: 'ديور', price: 860, discount: 11, image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80' },
+  { id: 'women09', category: 'women', name: 'ليبرا', price: 780, discount: 10, image: 'https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf?auto=format&fit=crop&w=900&q=80' },
+  { id: 'women10', category: 'women', name: 'خمرة', price: 820, discount: 15, image: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80' },
+  { id: 'men01', category: 'men', name: 'ديور سوفاج', price: 990, discount: 18, image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=80' },
+  { id: 'men02', category: 'men', name: 'بلو دو شانيل', price: 980, discount: 17, image: 'https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf?auto=format&fit=crop&w=900&q=80' },
+  { id: 'men03', category: 'men', name: 'اكوا دي جو - جورجيو ارماني', price: 940, discount: 15, image: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80' },
+  { id: 'men04', category: 'men', name: 'رساسي حواس فور هيم', price: 830, discount: 14, image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80' },
+  { id: 'men05', category: 'men', name: 'ون مليون', price: 900, discount: 13, image: 'https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf?auto=format&fit=crop&w=900&q=80' },
+  { id: 'men06', category: 'men', name: '212', price: 820, discount: 12, image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80' },
+  { id: 'men07', category: 'men', name: 'باد بوي', price: 860, discount: 11, image: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80' },
+  { id: 'men08', category: 'men', name: 'جان بول', price: 870, discount: 12, image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80' },
+  { id: 'men09', category: 'men', name: 'سترونجر وذ يو', price: 880, discount: 12, image: 'https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf?auto=format&fit=crop&w=900&q=80' },
+  { id: 'men10', category: 'men', name: 'جريت سيلفر', price: 840, discount: 10, image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80' },
 ];
 
 const productGrid = document.getElementById('product-grid');
@@ -65,6 +39,7 @@ const tabs = document.querySelectorAll('.tab');
 
 let cart = JSON.parse(localStorage.getItem('shahendaCart')) || {};
 let activeCategory = 'all';
+const ORDER_BACKUP_KEY = 'shahendaOrderBackup';
 
 function formatCurrency(value) {
   return new Intl.NumberFormat('en-EG', {
@@ -76,6 +51,63 @@ function formatCurrency(value) {
 
 function saveCart() {
   localStorage.setItem('shahendaCart', JSON.stringify(cart));
+}
+
+function getBackupQueue() {
+  return JSON.parse(localStorage.getItem(ORDER_BACKUP_KEY) || '[]');
+}
+
+function setBackupQueue(queue) {
+  localStorage.setItem(ORDER_BACKUP_KEY, JSON.stringify(queue));
+}
+
+function saveBackupOrder(order) {
+  const queue = getBackupQueue();
+  queue.push(order);
+  setBackupQueue(queue);
+}
+
+function buildWhatsAppMessage(order) {
+  const productLines = order.products.map((item) => `- ${item.name} x${item.quantity}`).join('\n');
+  return `طلب جديد من Shahenda Store\n` +
+    `الاسم: ${order.name}\n` +
+    `الهاتف: ${order.phone}\n` +
+    `العنوان: ${order.address}\n` +
+    `المنتجات:\n${productLines}\n` +
+    `المجموع: ${formatCurrency(order.totalPrice)}`;
+}
+
+function openWhatsAppOrder(order) {
+  const message = buildWhatsAppMessage(order);
+  const url = `${WHATSAPP_URL_BASE}?text=${encodeURIComponent(message)}`;
+  window.open(url, '_blank');
+}
+
+async function syncBackupOrders() {
+  const queue = getBackupQueue();
+  if (queue.length === 0) return;
+
+  for (let index = 0; index < queue.length; index += 1) {
+    const backupOrder = queue[index];
+    try {
+      const response = await fetch(SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(backupOrder),
+      });
+      if (!response.ok) throw new Error(`Sync failed ${response.status}`);
+      const text = await response.text();
+      const data = JSON.parse(text);
+      if (data.status === 'error') throw new Error(data.message || 'Sync error');
+      queue.splice(index, 1);
+      index -= 1;
+    } catch (error) {
+      console.warn('Backup order sync aborted:', error);
+      break;
+    }
+  }
+
+  setBackupQueue(queue);
 }
 
 function getCartItems() {
@@ -257,7 +289,9 @@ function handleCheckout(event) {
     })
     .catch((error) => {
       console.error('Order submission error:', error.message);
-      alert(`Error: ${error.message}`);
+      saveBackupOrder(payload);
+      openWhatsAppOrder(payload);
+      alert(`Order sent to WhatsApp and will sync later. Error: ${error.message}`);
     });
 }
 
@@ -272,6 +306,35 @@ continueCheckout.addEventListener('click', () => {
 
 tabs.forEach((tab) => tab.addEventListener('click', handleCategoryChange));
 checkoutForm.addEventListener('submit', handleCheckout);
+document.getElementById('whatsapp-order').addEventListener('click', () => {
+  const name = checkoutForm['name'].value.trim();
+  const phone = checkoutForm['phone'].value.trim();
+  const address = checkoutForm['address'].value.trim();
+  const items = getCartItems();
+
+  if (!name || !phone || !address) {
+    alert('Please complete all checkout fields before sending the order to WhatsApp.');
+    return;
+  }
+
+  if (items.length === 0) {
+    alert('Your cart is empty. Add products before placing an order.');
+    return;
+  }
+
+  const totalPrice = calculateSubtotal();
+  const payload = {
+    name,
+    phone,
+    address,
+    products: items.map((item) => ({ id: item.id, name: item.name, quantity: item.quantity, price: item.price })),
+    totalPrice,
+    date: new Date().toISOString(),
+  };
+
+  openWhatsAppOrder(payload);
+});
 
 renderProducts();
 renderCart();
+syncBackupOrders();
