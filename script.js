@@ -1,6 +1,6 @@
 const SUPABASE_URL = 'https://aweuqtiqfxjoflvvturi.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_DIHyv13-yCxgBKIC8PYCvQ_394bcWSE';
-const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
+const supabaseClient = typeof supabase !== 'undefined' && supabase.createClient ? supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
 const products = [
   { id: 1, name: 'Chanel No. 5', brand: 'Chanel', volume: '90ML', prices: { '30ml': 1290, '60ml': 1990, '90ml': 2590, '120ml': 3190 }, offer: 'BUY 1 GET 1 FREE', discount: 40 },
@@ -232,9 +232,10 @@ async function submitOrderHandler() {
   submitOrder.textContent = 'تأكيد الطلب';
 
   if (error) {
-    orderStatus.textContent = 'فشل في حفظ الطلب. حاول مرة أخرى.';
+    const message = error.message || 'فشل في حفظ الطلب.';
+    orderStatus.textContent = `فشل في حفظ الطلب: ${message}`;
     orderStatus.className = 'order-status error';
-    console.error(error);
+    console.error('Supabase insert error:', error);
     return;
   }
 
