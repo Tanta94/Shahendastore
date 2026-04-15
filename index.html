@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Shahenda Store | Perfume Shop</title>
+  <title>Shahenda Store | متجر عطور</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -12,134 +12,134 @@
 <body>
   <div class="page-shell">
     <header class="topbar">
-      <div class="topbar-left">
-        <button class="icon-button" aria-label="Menu">☰</button>
-        <div class="brand">
-          <div class="brand-mark">O</div>
-          <div>
-            <h1>Shahenda</h1>
-            <p>متجر عطور بسيط</p>
-          </div>
+      <div class="brand-area">
+        <div class="brand-mark">ع</div>
+        <div>
+          <h1>Shahenda Store</h1>
+          <p>متجر عطور بأسلوب نون وأمازون</p>
         </div>
       </div>
-      <div class="topbar-right">
-        <button class="icon-button" aria-label="Search">🔍</button>
-        <button class="icon-button cart-button" aria-label="Cart">🛒 <span id="cartCount">0</span></button>
+
+      <div class="search-area">
+        <input id="searchInput" type="search" placeholder="ابحث عن عطر أو ماركة" />
+        <button class="button button-secondary">بحث</button>
+      </div>
+
+      <div class="header-actions">
+        <button class="icon-button" aria-label="Wishlist">♡</button>
+        <button class="icon-button" aria-label="Cart">🛒 <span id="cartCount">0</span></button>
       </div>
     </header>
 
-    <main>
-      <section class="hero simple-hero">
-        <div>
-          <p class="eyebrow">متجر إلكتروني</p>
-          <h2>عطرك المفضل في واجهة بسيطة وسهلة</h2>
-          <p>اختر من بين أفضل الماركات، حدد الحجم، نوع العبوة، وأضف إلى العربة بسهولة.</p>
-        </div>
-      </section>
+    <section class="hero-banner">
+      <div class="hero-copy">
+        <p class="eyebrow">عروض اليوم</p>
+        <h2>أقوى تشكيلة عطور عالمية</h2>
+        <p>اختر من بين أفضل المنتجات السريعة والشحن السهل.</p>
+      </div>
+      <div class="hero-note">
+        <span>توصيل سريع</span>
+        <span>لكل الطلبات</span>
+      </div>
+    </section>
 
-      <section id="collections" class="section products-section">
-        <div class="section-header">
-          <div>
-            <p class="eyebrow">منتجاتنا</p>
-            <h2>عطور مشهورة جاهزة للطلب</h2>
-          </div>
-        </div>
-        <div class="product-grid" id="productGrid"></div>
-      </section>
+    <section class="category-strip">
+      <button class="category-pill active">الأكثر مبيعاً</button>
+      <button class="category-pill">عطور نسائية</button>
+      <button class="category-pill">عطور رجالية</button>
+      <button class="category-pill">عطور فاخرة</button>
+      <button class="category-pill">عروض اليوم</button>
+    </section>
 
-      <section id="checkout" class="section checkout-section">
-        <div class="checkout-panel">
-          <div class="panel-header">
+    <section id="collections" class="section products-section">
+      <div class="section-header">
+        <h2>منتجاتنا</h2>
+        <p>اضغط على أي منتج ليظهر في سلة الطلب.</p>
+      </div>
+      <div class="product-grid" id="productGrid"></div>
+    </section>
+
+    <section id="checkout" class="section checkout-section">
+      <div class="checkout-panel">
+        <div class="panel-header">
+          <h2>سلة الطلب</h2>
+          <p>أضف منتج واحد أو أكثر، ثم أكمل بياناتك وأرسل الطلب.</p>
+        </div>
+
+        <div class="order-card" id="orderCard">
+          <div class="order-product-preview">
+            <div class="product-swatch" id="productPlaceholder">ع</div>
             <div>
-              <p class="eyebrow">سلة الطلب</p>
-              <h2>تفاصيل الطلب البسيط</h2>
+              <p class="eyebrow" id="selectedBrand">Chanel</p>
+              <h3 id="selectedProduct">Chanel No. 5</h3>
+              <p id="selectedDescription">Classic floral aldehyde with elegant depth.</p>
             </div>
-            <p>اضغط على أي منتج لإضافته ثم أكمل بيانات الشحن وادفع.</p>
           </div>
 
-          <div class="order-card" id="orderCard">
-            <div class="order-product-preview">
-              <div class="product-swatch" id="productPlaceholder">O</div>
-              <div>
-                <p class="eyebrow" id="selectedBrand">Chanel</p>
-                <h3 id="selectedProduct">Chanel No. 5</h3>
-                <p id="selectedDescription">Classic floral aldehyde with elegant depth.</p>
-              </div>
-            </div>
-
-            <div class="fields-grid">
-              <label>
-                الحجم
-                <select id="sizeSelect"></select>
-              </label>
-              <label>
-                نوع العبوة
-                <select id="bottleSelect">
-                  <option value="Automatic Bottle">Automatic Bottle</option>
-                  <option value="Refill">Refill</option>
-                </select>
-              </label>
-              <label>
-                الكمية
-                <input id="quantityInput" type="number" min="1" value="1" />
-              </label>
-              <label class="promo-field">
-                كود الخصم
-                <input id="promoInput" type="text" placeholder="أدخل الكود" />
-              </label>
-            </div>
-
-            <div class="summary-block">
-              <div class="summary-row">
-                <span>السعر</span>
-                <span id="subtotalValue">$0.00</span>
-              </div>
-              <div class="summary-row">
-                <span>الخصم</span>
-                <span id="discountValue">$0.00</span>
-              </div>
-              <div class="summary-row total-row">
-                <span>الإجمالي</span>
-                <span id="totalValue">$0.00</span>
-              </div>
-            </div>
-
-            <div class="customer-fields">
-              <label>
-                الاسم الكامل
-                <input id="customerName" type="text" placeholder="الاسم" />
-              </label>
-              <label>
-                البريد الإلكتروني
-                <input id="customerEmail" type="email" placeholder="example@mail.com" />
-              </label>
-              <label>
-                رقم الهاتف
-                <input id="customerPhone" type="tel" placeholder="0100xxxxxxx" />
-              </label>
-              <label>
-                ملاحظات
-                <textarea id="customerNote" rows="3" placeholder="ملاحظات اضافية"></textarea>
-              </label>
-            </div>
-
-            <button id="submitOrder" class="button button-primary">إرسال الطلب</button>
-            <p class="disclaimer">سيتم حفظ الطلب في قاعدة بيانات Supabase.</p>
-            <div id="orderStatus" class="order-status"></div>
+          <div class="fields-grid">
+            <label>
+              الحجم
+              <select id="sizeSelect"></select>
+            </label>
+            <label>
+              نوع العبوة
+              <select id="bottleSelect">
+                <option value="Automatic Bottle">Automatic Bottle</option>
+                <option value="Refill">Refill</option>
+              </select>
+            </label>
+            <label>
+              الكمية
+              <input id="quantityInput" type="number" min="1" value="1" />
+            </label>
+            <label>
+              كود الخصم
+              <input id="promoInput" type="text" placeholder="أدخل الكود" />
+            </label>
           </div>
+
+          <div class="summary-block">
+            <div class="summary-row">
+              <span>السعر</span>
+              <span id="subtotalValue">$0.00</span>
+            </div>
+            <div class="summary-row">
+              <span>الخصم</span>
+              <span id="discountValue">$0.00</span>
+            </div>
+            <div class="summary-row total-row">
+              <span>الإجمالي</span>
+              <span id="totalValue">$0.00</span>
+            </div>
+          </div>
+
+          <div class="customer-fields">
+            <label>
+              الاسم الكامل
+              <input id="customerName" type="text" placeholder="الاسم" />
+            </label>
+            <label>
+              البريد الإلكتروني
+              <input id="customerEmail" type="email" placeholder="example@mail.com" />
+            </label>
+            <label>
+              رقم الهاتف
+              <input id="customerPhone" type="tel" placeholder="0100xxxxxxx" />
+            </label>
+            <label>
+              ملاحظة
+              <textarea id="customerNote" rows="3" placeholder="ملاحظات اضافية"></textarea>
+            </label>
+          </div>
+
+          <button id="submitOrder" class="button button-primary">إرسال الطلب</button>
+          <div id="orderStatus" class="order-status"></div>
         </div>
-      </section>
-    </main>
-
-    <nav class="mobile-nav">
-      <a href="#collections" class="nav-item active">Shop</a>
-      <a href="#" class="nav-item">Wishlist</a>
-      <a href="#checkout" class="nav-item">Cart</a>
-      <a href="#" class="nav-item">Account</a>
-      <a href="#" class="nav-item">Search</a>
-    </nav>
+      </div>
+    </section>
   </div>
 
-  <script type="module" src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/supabase.min.js" defer></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
