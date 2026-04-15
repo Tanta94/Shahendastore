@@ -1,8 +1,6 @@
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/supabase.js';
-
 const SUPABASE_URL = 'https://aweuqtiqfxjoflvvturi.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_DIHyv13-yCxgBKIC8PYCvQ_394bcWSE';
-const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const products = [
   { id: 1, name: 'Chanel No. 5', brand: 'Chanel', description: 'Signature floral elegance.', prices: { '30ml': 89, '60ml': 159, '90ml': 219, '120ml': 279 } },
@@ -49,7 +47,6 @@ const customerName = document.getElementById('customerName');
 const customerEmail = document.getElementById('customerEmail');
 const customerPhone = document.getElementById('customerPhone');
 const customerNote = document.getElementById('customerNote');
-
 let selectedProductId = products[0].id;
 let currentDiscount = 0;
 let currentPromoCode = '';
@@ -62,9 +59,9 @@ function renderProducts() {
     card.className = 'product-card';
     const volume = '90ML';
     const price = product.prices['90ml'];
-    const oldPrice = (price * 1.3).toFixed(0);
+    const oldPrice = (price * 1.25).toFixed(0);
     card.innerHTML = `
-      <div class="product-art" data-volume="${volume}">${product.brand.slice(0, 1)}</div>
+      <div class="product-image">${product.brand.slice(0, 1)}<span class="price-tag">${volume}</span></div>
       <div class="product-content">
         <h3 class="product-title">${product.name}</h3>
         <p class="product-subtitle">${product.brand}</p>
@@ -74,7 +71,7 @@ function renderProducts() {
         </div>
       </div>
       <div class="product-footer">
-        <button class="button button-primary">Add to cart</button>
+        <button class="button button-primary">أضف إلى العربة</button>
       </div>
     `;
     const button = card.querySelector('button');
@@ -125,13 +122,12 @@ function updateSummary() {
 
 async function fetchPromoCode(code) {
   if (!code) return null;
-  const { data, error } = await supabase
+  const { data, error } = await supabaseClient
     .from('promo_codes')
     .select('code, discount_percentage')
     .eq('code', code.trim().toUpperCase())
     .eq('active', true)
     .single();
-
   if (error || !data) return null;
   return data;
 }
@@ -145,21 +141,19 @@ async function handlePromoValidation() {
     updateSummary();
     return;
   }
-
-  orderStatus.textContent = 'Validating promo code...';
+  orderStatus.textContent = 'جارٍ التحقق من كود الخصم...';
   const promo = await fetchPromoCode(code);
   if (promo) {
     currentDiscount = promo.discount_percentage;
     currentPromoCode = promo.code;
-    orderStatus.textContent = `Promo applied: ${currentDiscount}% off.`;
+    orderStatus.textContent = `تم تطبيق الخصم ${currentDiscount}%`;
     orderStatus.className = 'order-status success';
   } else {
     currentDiscount = 0;
     currentPromoCode = '';
-    orderStatus.textContent = 'Promo code not found or expired.';
+    orderStatus.textContent = 'الكود غير صحيح أو منتهي.';
     orderStatus.className = 'order-status error';
   }
-
   updateSummary();
 }
 
@@ -172,25 +166,21 @@ async function submitOrderHandler() {
   const subtotal = unitPrice * quantity;
   const discountAmount = (subtotal * currentDiscount) / 100;
   const total = subtotal - discountAmount;
-
   const customer = {
     name: customerName.value.trim(),
     email: customerEmail.value.trim(),
     phone: customerPhone.value.trim(),
     note: customerNote.value.trim(),
   };
-
   if (!customer.name || !customer.email) {
-    orderStatus.textContent = 'Please enter your name and email.';
+    orderStatus.textContent = 'اكتب الاسم والبريد عشان نكمل.';
     orderStatus.className = 'order-status error';
     return;
   }
-
   submitOrder.disabled = true;
-  submitOrder.textContent = 'Saving order...';
+  submitOrder.textContent = 'جارٍ حفظ الطلب...';
   orderStatus.textContent = '';
-
-  const { error } = await supabase.from('orders').insert([{ 
+  const { error } = await supabaseClient.from('orders').insert([{ 
     product_name: product.name,
     brand: product.brand,
     size,
@@ -206,18 +196,15 @@ async function submitOrderHandler() {
     customer_phone: customer.phone || null,
     order_note: customer.note || null,
   }]);
-
   submitOrder.disabled = false;
   submitOrder.textContent = 'إرسال الطلب';
-
   if (error) {
-    orderStatus.textContent = 'Unable to save order. Please try again later.';
+    orderStatus.textContent = 'حدث خطأ، حاول مرة ثانية.';
     orderStatus.className = 'order-status error';
     console.error('Supabase error:', error);
     return;
   }
-
-  orderStatus.textContent = 'Order received successfully! Your order has been saved for tracking.';
+  orderStatus.textContent = 'تم حفظ الطلب بنجاح!';
   orderStatus.className = 'order-status success';
   customerName.value = '';
   customerEmail.value = '';
@@ -234,7 +221,7 @@ function addToCart(productId) {
   selectProduct(productId);
   cartCount += 1;
   updateCartCount(cartCount);
-  orderStatus.textContent = 'تمت إضافة المنتج إلى العربة. اكمل بياناتك ثم أرسل الطلب.';
+  orderStatus.textContent = 'تمت إضافة المنتج إلى العربة.';
   orderStatus.className = 'order-status success';
 }
 
