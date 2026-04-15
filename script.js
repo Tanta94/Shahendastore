@@ -1,340 +1,230 @@
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwTabnY7LoDk_ajb6HYfuIJ5Erd2b1_cJ-J1AuVA3OP3jl4teRNcLeqy5e11_-4I2rg/exec';
-const WHATSAPP_NUMBER = '201110511138';
-const WHATSAPP_URL_BASE = `https://wa.me/${WHATSAPP_NUMBER}`;
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/supabase.js';
+
+const SUPABASE_URL = 'https://aweuqtiqfxjoflvvturi.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_DIHyv13-yCxgBKIC8PYCvQ_394bcWSE';
+const supabase = createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const products = [
-  { id: 'women01', category: 'women', name: 'Rouge Khamra', price: 950, discount: 15, image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80' },
-  { id: 'women02', category: 'women', name: 'Libra', price: 980, discount: 12, image: 'https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=900&q=80' },
-  { id: 'women03', category: 'women', name: 'Dior', price: 920, discount: 10, image: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80' },
-  { id: 'women04', category: 'women', name: 'Chanel No. 5', price: 940, discount: 14, image: 'https://images.unsplash.com/photo-1515114929878-0a4ac90c7d96?auto=format&fit=crop&w=900&q=80' },
-  { id: 'women05', category: 'women', name: 'Coco Mademoiselle', price: 870, discount: 13, image: 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=900&q=80' },
-  { id: 'women06', category: 'women', name: 'Good Girl – Carolina Herrera', price: 910, discount: 16, image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80' },
-  { id: 'women07', category: 'women', name: 'Miss Dior', price: 930, discount: 12, image: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80' },
-  { id: 'women08', category: 'women', name: 'Valentino', price: 860, discount: 11, image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80' },
-  { id: 'women09', category: 'women', name: 'Black Opium (YSL)', price: 780, discount: 10, image: 'https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf?auto=format&fit=crop&w=900&q=80' },
-  { id: 'women10', category: 'women', name: 'La Vie Est Belle (Lancôme)', price: 820, discount: 15, image: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80' },
-  { id: 'men01', category: 'men', name: 'Dior Sauvage', price: 990, discount: 18, image: 'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=80' },
-  { id: 'men02', category: 'men', name: 'Bleu de Chanel', price: 980, discount: 17, image: 'https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf?auto=format&fit=crop&w=900&q=80' },
-  { id: 'men03', category: 'men', name: 'Acqua di Giò', price: 940, discount: 15, image: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80' },
-  { id: 'men04', category: 'men', name: 'Rasasi Hawas for Him', price: 830, discount: 14, image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80' },
-  { id: 'men05', category: 'men', name: 'One Million', price: 900, discount: 13, image: 'https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf?auto=format&fit=crop&w=900&q=80' },
-  { id: 'men06', category: 'men', name: '212', price: 820, discount: 12, image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80' },
-  { id: 'men07', category: 'men', name: 'Bad Boy', price: 860, discount: 11, image: 'https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=900&q=80' },
-  { id: 'men08', category: 'men', name: 'Jean Paul', price: 870, discount: 12, image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=900&q=80' },
-  { id: 'men09', category: 'men', name: 'Stronger With You', price: 880, discount: 12, image: 'https://images.unsplash.com/photo-1508609349937-5ec4ae374ebf?auto=format&fit=crop&w=900&q=80' },
-  { id: 'men10', category: 'men', name: 'Great Silver', price: 840, discount: 10, image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=900&q=80' },
+  { id: 1, name: 'Chanel No. 5', brand: 'Chanel', description: 'Signature floral elegance.', prices: { '30ml': 89, '60ml': 159, '90ml': 219, '120ml': 279 } },
+  { id: 2, name: 'Coco Mademoiselle', brand: 'Chanel', description: 'Modern orange blossom sophistication.', prices: { '30ml': 95, '60ml': 169, '90ml': 235, '120ml': 295 } },
+  { id: 3, name: 'Good Girl', brand: 'Carolina Herrera', description: 'Bold, seductive, unforgettable.', prices: { '30ml': 79, '60ml': 145, '90ml': 199, '120ml': 255 } },
+  { id: 4, name: 'Miss Dior', brand: 'Dior', description: 'Timeless elegance with luminous florals.', prices: { '30ml': 85, '60ml': 149, '90ml': 215, '120ml': 269 } },
+  { id: 5, name: 'Valentino', brand: 'Valentino', description: 'Italian glamour in a fragrant form.', prices: { '30ml': 82, '60ml': 149, '90ml': 209, '120ml': 269 } },
+  { id: 6, name: 'Black Opium', brand: 'YSL', description: 'Dark coffee and floral gourmand.', prices: { '30ml': 78, '60ml': 145, '90ml': 205, '120ml': 259 } },
+  { id: 7, name: 'La Vie Est Belle', brand: 'Lancôme', description: 'Radiant sweetness with elegant depth.', prices: { '30ml': 72, '60ml': 135, '90ml': 195, '120ml': 245 } },
+  { id: 8, name: 'Dior Sauvage', brand: 'Dior', description: 'Fresh spicy power for the modern man.', prices: { '30ml': 88, '60ml': 159, '90ml': 218, '120ml': 278 } },
+  { id: 9, name: 'Bleu de Chanel', brand: 'Chanel', description: 'Citrus wood with effortless refinement.', prices: { '30ml': 92, '60ml': 165, '90ml': 225, '120ml': 285 } },
+  { id: 10, name: 'Acqua di Giò', brand: 'Giorgio Armani', description: 'Marine freshness meets classic Armani.', prices: { '30ml': 69, '60ml': 129, '90ml': 185, '120ml': 235 } },
+  { id: 11, name: 'Rasasi Hawas for Him', brand: 'Rasasi', description: 'Modern spice and aquatic energy.', prices: { '30ml': 58, '60ml': 109, '90ml': 159, '120ml': 199 } },
+  { id: 12, name: 'One Million', brand: 'Paco Rabanne', description: 'Statement boldness with bright leather.', prices: { '30ml': 72, '60ml': 135, '90ml': 195, '120ml': 245 } },
+  { id: 13, name: '212', brand: 'Carolina Herrera', description: 'Urban freshness tailored for today.', prices: { '30ml': 65, '60ml': 119, '90ml': 169, '120ml': 209 } },
+  { id: 14, name: 'Bad Boy', brand: 'Carolina Herrera', description: 'Rebellious spice and woody charm.', prices: { '30ml': 69, '60ml': 129, '90ml': 179, '120ml': 219 } },
+  { id: 15, name: 'Jean Paul Gaultier', brand: 'Jean Paul Gaultier', description: 'Provocative marine and leather notes.', prices: { '30ml': 76, '60ml': 139, '90ml': 199, '120ml': 255 } },
+  { id: 16, name: 'Stronger With You', brand: 'Emporio Armani', description: 'Spice and sweet comfort for him.', prices: { '30ml': 74, '60ml': 139, '90ml': 195, '120ml': 249 } },
+  { id: 17, name: 'The One', brand: 'Dolce & Gabbana', description: 'Warm amber with elegant sophistication.', prices: { '30ml': 81, '60ml': 149, '90ml': 209, '120ml': 269 } },
+  { id: 18, name: 'Valentino Born In Roma', brand: 'Valentino', description: 'Contemporary freshness with citrus spice.', prices: { '30ml': 84, '60ml': 159, '90ml': 219, '120ml': 279 } },
+  { id: 19, name: 'Elixir', brand: 'Cartier', description: 'Luxury potion of florals and woods.', prices: { '30ml': 91, '60ml': 169, '90ml': 229, '120ml': 289 } },
+  { id: 20, name: 'Azzaro Most Wanted', brand: 'Azzaro', description: 'Fiery spice balanced with soft amber.', prices: { '30ml': 73, '60ml': 139, '90ml': 199, '120ml': 249 } },
+  { id: 21, name: 'Asad', brand: 'Asad', description: 'Exclusive oriental warmth and musk.', prices: { '30ml': 66, '60ml': 125, '90ml': 179, '120ml': 229 } },
+  { id: 22, name: 'Althair', brand: 'Althair', description: 'Smooth oud, citrus, and rich woods.', prices: { '30ml': 64, '60ml': 119, '90ml': 175, '120ml': 225 } },
 ];
 
-const productGrid = document.getElementById('product-grid');
-const cartPanel = document.getElementById('cart-panel');
-const cartItemsContainer = document.getElementById('cart-items');
-const cartCount = document.getElementById('cart-count');
-const cartSubtotal = document.getElementById('cart-subtotal');
-const checkoutTotal = document.getElementById('checkout-total');
-const checkoutForm = document.getElementById('checkout-form');
-const openCart = document.getElementById('open-cart');
-const closeCart = document.getElementById('close-cart');
-const continueCheckout = document.getElementById('continue-checkout');
-const tabs = document.querySelectorAll('.tab');
+const sizeOptions = ['30ml', '60ml', '90ml', '120ml'];
 
-let cart = JSON.parse(localStorage.getItem('shahendaCart')) || {};
-let activeCategory = 'all';
-const ORDER_BACKUP_KEY = 'shahendaOrderBackup';
+const productGrid = document.getElementById('productGrid');
+const selectedBrand = document.getElementById('selectedBrand');
+const selectedProduct = document.getElementById('selectedProduct');
+const selectedDescription = document.getElementById('selectedDescription');
+const productPlaceholder = document.getElementById('productPlaceholder');
+const sizeSelect = document.getElementById('sizeSelect');
+const bottleSelect = document.getElementById('bottleSelect');
+const quantityInput = document.getElementById('quantityInput');
+const promoInput = document.getElementById('promoInput');
+const subtotalValue = document.getElementById('subtotalValue');
+const discountValue = document.getElementById('discountValue');
+const totalValue = document.getElementById('totalValue');
+const submitOrder = document.getElementById('submitOrder');
+const orderStatus = document.getElementById('orderStatus');
+const customerName = document.getElementById('customerName');
+const customerEmail = document.getElementById('customerEmail');
+const customerPhone = document.getElementById('customerPhone');
+const customerNote = document.getElementById('customerNote');
 
-function formatCurrency(value) {
-  return new Intl.NumberFormat('en-EG', {
-    style: 'currency',
-    currency: 'EGP',
-    maximumFractionDigits: 2,
-  }).format(value);
-}
+let selectedProductId = products[0].id;
+let currentDiscount = 0;
+let currentPromoCode = '';
 
-function saveCart() {
-  localStorage.setItem('shahendaCart', JSON.stringify(cart));
-}
-
-function getBackupQueue() {
-  return JSON.parse(localStorage.getItem(ORDER_BACKUP_KEY) || '[]');
-}
-
-function setBackupQueue(queue) {
-  localStorage.setItem(ORDER_BACKUP_KEY, JSON.stringify(queue));
-}
-
-function saveBackupOrder(order) {
-  const queue = getBackupQueue();
-  queue.push(order);
-  setBackupQueue(queue);
-}
-
-function buildWhatsAppMessage(order) {
-  const productLines = order.products.map((item) => `- ${item.name} x${item.quantity}`).join('\n');
-  return `طلب جديد من Shahenda Store\n` +
-    `الاسم: ${order.name}\n` +
-    `الهاتف: ${order.phone}\n` +
-    `العنوان: ${order.address}\n` +
-    `المنتجات:\n${productLines}\n` +
-    `المجموع: ${formatCurrency(order.totalPrice)}`;
-}
-
-function openWhatsAppOrder(order) {
-  const message = buildWhatsAppMessage(order);
-  const url = `${WHATSAPP_URL_BASE}?text=${encodeURIComponent(message)}`;
-  window.open(url, '_blank');
-}
-
-async function syncBackupOrders() {
-  const queue = getBackupQueue();
-  if (queue.length === 0) return;
-
-  for (let index = 0; index < queue.length; index += 1) {
-    const backupOrder = queue[index];
-    try {
-      const response = await fetch(SCRIPT_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(backupOrder),
-      });
-      if (!response.ok) throw new Error(`Sync failed ${response.status}`);
-      const text = await response.text();
-      const data = JSON.parse(text);
-      if (data.status === 'error') throw new Error(data.message || 'Sync error');
-      queue.splice(index, 1);
-      index -= 1;
-    } catch (error) {
-      console.warn('Backup order sync aborted:', error);
-      break;
-    }
-  }
-
-  setBackupQueue(queue);
-}
-
-function getCartItems() {
-  return Object.keys(cart).map((id) => {
-    const product = products.find((item) => item.id === id);
-    return { ...product, quantity: cart[id] };
+function renderProducts() {
+  productGrid.innerHTML = '';
+  products.forEach((product) => {
+    const card = document.createElement('article');
+    card.className = 'product-card';
+    card.innerHTML = `
+      <div class="product-art">${product.brand.slice(0, 1)}</div>
+      <div>
+        <h3>${product.name}</h3>
+        <p>${product.description}</p>
+      </div>
+      <div class="product-meta">
+        <span>${product.brand}</span>
+        <strong>$${product.prices['30ml'].toFixed(2)}</strong>
+      </div>
+      <button class="button button-secondary">Select</button>
+    `;
+    const selectButton = card.querySelector('button');
+    selectButton.addEventListener('click', () => selectProduct(product.id));
+    productGrid.appendChild(card);
   });
 }
 
-function calculateSubtotal() {
-  return getCartItems().reduce((sum, item) => sum + item.price * item.quantity, 0);
+function populateSizeOptions() {
+  sizeSelect.innerHTML = sizeOptions.map((size) => `<option value="${size}">${size}</option>`).join('');
 }
 
-function updateCartCount() {
-  const totalItems = getCartItems().reduce((sum, item) => sum + item.quantity, 0);
-  cartCount.textContent = totalItems;
+function formatCurrency(value) {
+  return `$${value.toFixed(2)}`;
 }
 
-function renderProducts() {
-  const filtered = activeCategory === 'all' ? products : products.filter((product) => product.category === activeCategory);
-  productGrid.innerHTML = filtered.map((product) => {
-    return `
-      <article class="product-card">
-        <div class="product-image">
-          <img src="${product.image}" alt="${product.name}" />
-          <span class="badge">-${product.discount}%</span>
-        </div>
-        <div class="product-info">
-          <h3>${product.name}</h3>
-          <p>${product.category === 'men' ? 'For Men' : 'For Women'}</p>
-          <div class="price-row">
-            <span class="price">${formatCurrency(product.price)}</span>
-            <button class="product-button" data-action="add" data-id="${product.id}">Add to Cart</button>
-          </div>
-        </div>
-      </article>
-    `;
-  }).join('');
+function getSelectedProduct() {
+  return products.find((item) => item.id === selectedProductId);
 }
 
-function renderCart() {
-  const items = getCartItems();
-  cartItemsContainer.innerHTML = items.length === 0 ? '<p class="empty-cart">Your cart is empty. Add a fragrance to begin.</p>' : items.map((item) => {
-    return `
-      <div class="cart-item">
-        <img src="${item.image}" alt="${item.name}" />
-        <div class="cart-item-content">
-          <h4>${item.name}</h4>
-          <p>${formatCurrency(item.price)} × ${item.quantity}</p>
-          <div class="quantity-controls">
-            <button data-action="decrease" data-id="${item.id}">-</button>
-            <span>${item.quantity}</span>
-            <button data-action="increase" data-id="${item.id}">+</button>
-          </div>
-          <button class="remove-item" data-action="remove" data-id="${item.id}">Remove</button>
-        </div>
-      </div>
-    `;
-  }).join('');
-
-  const subtotal = calculateSubtotal();
-  cartSubtotal.textContent = formatCurrency(subtotal);
-  checkoutTotal.textContent = formatCurrency(subtotal);
-  updateCartCount();
+function selectProduct(id) {
+  selectedProductId = id;
+  const product = getSelectedProduct();
+  selectedBrand.textContent = product.brand;
+  selectedProduct.textContent = product.name;
+  selectedDescription.textContent = product.description;
+  productPlaceholder.textContent = product.brand.slice(0, 1);
+  sizeSelect.value = '30ml';
+  quantityInput.value = 1;
+  promoInput.value = '';
+  currentDiscount = 0;
+  currentPromoCode = '';
+  updateSummary();
 }
 
-function openCartPanel() {
-  cartPanel.classList.add('open');
-  cartPanel.classList.remove('hidden');
+function updateSummary() {
+  const product = getSelectedProduct();
+  const size = sizeSelect.value;
+  const quantity = Math.max(1, Number(quantityInput.value));
+  const unitPrice = product.prices[size] || product.prices['30ml'];
+  const subtotal = unitPrice * quantity;
+  const discountAmount = (subtotal * currentDiscount) / 100;
+  const total = subtotal - discountAmount;
+  subtotalValue.textContent = formatCurrency(subtotal);
+  discountValue.textContent = formatCurrency(discountAmount);
+  totalValue.textContent = formatCurrency(total);
 }
 
-function closeCartPanel() {
-  cartPanel.classList.remove('open');
+async function fetchPromoCode(code) {
+  if (!code) return null;
+  const { data, error } = await supabase
+    .from('promo_codes')
+    .select('code, discount_percentage')
+    .eq('code', code.trim().toUpperCase())
+    .eq('active', true)
+    .single();
+
+  if (error || !data) return null;
+  return data;
 }
 
-function addToCart(productId) {
-  cart[productId] = (cart[productId] || 0) + 1;
-  saveCart();
-  renderCart();
-}
-
-function updateCartItem(productId, delta) {
-  if (!cart[productId]) return;
-  cart[productId] += delta;
-  if (cart[productId] <= 0) {
-    delete cart[productId];
-  }
-  saveCart();
-  renderCart();
-}
-
-function removeCartItem(productId) {
-  delete cart[productId];
-  saveCart();
-  renderCart();
-}
-
-function handleProductGridClick(event) {
-  const button = event.target.closest('button[data-action="add"]');
-  if (!button) return;
-  const productId = button.dataset.id;
-  addToCart(productId);
-  openCartPanel();
-}
-
-function handleCartClick(event) {
-  const actionButton = event.target.closest('button[data-action]');
-  if (!actionButton) return;
-  const productId = actionButton.dataset.id;
-  const action = actionButton.dataset.action;
-
-  if (action === 'increase') updateCartItem(productId, 1);
-  if (action === 'decrease') updateCartItem(productId, -1);
-  if (action === 'remove') removeCartItem(productId);
-}
-
-function handleCategoryChange(event) {
-  const selected = event.target.closest('.tab');
-  if (!selected) return;
-  tabs.forEach((tab) => tab.classList.remove('active'));
-  selected.classList.add('active');
-  activeCategory = selected.dataset.category;
-  renderProducts();
-}
-
-function handleCheckout(event) {
-  event.preventDefault();
-  const name = checkoutForm['name'].value.trim();
-  const phone = checkoutForm['phone'].value.trim();
-  const address = checkoutForm['address'].value.trim();
-  const items = getCartItems();
-
-  if (!name || !phone || !address) {
-    alert('Please complete all checkout fields.');
+async function handlePromoValidation() {
+  const code = promoInput.value.trim().toUpperCase();
+  if (!code) {
+    currentDiscount = 0;
+    currentPromoCode = '';
+    orderStatus.textContent = '';
+    updateSummary();
     return;
   }
 
-  if (items.length === 0) {
-    alert('Your cart is empty. Add products before placing an order.');
-    return;
+  orderStatus.textContent = 'Validating promo code...';
+  const promo = await fetchPromoCode(code);
+  if (promo) {
+    currentDiscount = promo.discount_percentage;
+    currentPromoCode = promo.code;
+    orderStatus.textContent = `Promo applied: ${currentDiscount}% off.`;
+    orderStatus.className = 'order-status success';
+  } else {
+    currentDiscount = 0;
+    currentPromoCode = '';
+    orderStatus.textContent = 'Promo code not found or expired.';
+    orderStatus.className = 'order-status error';
   }
 
-  const totalPrice = calculateSubtotal();
-  const payload = {
-    name,
-    phone,
-    address,
-    products: items.map((item) => ({ id: item.id, name: item.name, quantity: item.quantity, price: item.price })),
-    totalPrice,
-    date: new Date().toISOString(),
+  updateSummary();
+}
+
+async function submitOrderHandler() {
+  const product = getSelectedProduct();
+  const size = sizeSelect.value;
+  const bottleType = bottleSelect.value;
+  const quantity = Math.max(1, Number(quantityInput.value));
+  const unitPrice = product.prices[size] || product.prices['30ml'];
+  const subtotal = unitPrice * quantity;
+  const discountAmount = (subtotal * currentDiscount) / 100;
+  const total = subtotal - discountAmount;
+
+  const customer = {
+    name: customerName.value.trim(),
+    email: customerEmail.value.trim(),
+    phone: customerPhone.value.trim(),
+    note: customerNote.value.trim(),
   };
 
-  console.log('Sending payload:', payload);
-  fetch(SCRIPT_URL, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(payload),
-  })
-    .then(async (response) => {
-      console.log('Response status:', response.status);
-      const text = await response.text();
-      console.log('Response text:', text);
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${text}`);
-      }
-      try {
-        return JSON.parse(text);
-      } catch (e) {
-        throw new Error(`Invalid JSON response: ${text}`);
-      }
-    })
-    .then((data) => {
-      console.log('Success response:', data);
-      cart = {};
-      saveCart();
-      renderCart();
-      checkoutForm.reset();
-      alert('Thank you! Your order has been sent successfully.');
-    })
-    .catch((error) => {
-      console.error('Order submission error:', error.message);
-      saveBackupOrder(payload);
-      openWhatsAppOrder(payload);
-      alert(`Order sent to WhatsApp and will sync later. Error: ${error.message}`);
-    });
+  if (!customer.name || !customer.email) {
+    orderStatus.textContent = 'Please enter your name and email.';
+    orderStatus.className = 'order-status error';
+    return;
+  }
+
+  submitOrder.disabled = true;
+  submitOrder.textContent = 'Saving order...';
+  orderStatus.textContent = '';
+
+  const { error } = await supabase.from('orders').insert([{ 
+    product_name: product.name,
+    brand: product.brand,
+    size,
+    bottle_type: bottleType,
+    quantity,
+    unit_price: unitPrice,
+    subtotal,
+    promo_code: currentPromoCode || null,
+    discount_amount: discountAmount,
+    total,
+    customer_name: customer.name,
+    customer_email: customer.email,
+    customer_phone: customer.phone || null,
+    order_note: customer.note || null,
+  }]);
+
+  submitOrder.disabled = false;
+  submitOrder.textContent = 'Place Secure Order';
+
+  if (error) {
+    orderStatus.textContent = 'Unable to save order. Please try again later.';
+    orderStatus.className = 'order-status error';
+    console.error('Supabase error:', error);
+    return;
+  }
+
+  orderStatus.textContent = 'Order received successfully! Your order has been saved for tracking.';
+  orderStatus.className = 'order-status success';
+  customerName.value = '';
+  customerEmail.value = '';
+  customerPhone.value = '';
+  customerNote.value = '';
 }
 
-productGrid.addEventListener('click', handleProductGridClick);
-cartItemsContainer.addEventListener('click', handleCartClick);
-openCart.addEventListener('click', openCartPanel);
-closeCart.addEventListener('click', closeCartPanel);
-continueCheckout.addEventListener('click', () => {
-  closeCartPanel();
-  document.getElementById('customer-name').scrollIntoView({ behavior: 'smooth', block: 'center' });
-});
+sizeSelect.addEventListener('change', updateSummary);
+quantityInput.addEventListener('input', updateSummary);
+bottleSelect.addEventListener('change', updateSummary);
+promoInput.addEventListener('change', handlePromoValidation);
+submitOrder.addEventListener('click', submitOrderHandler);
 
-tabs.forEach((tab) => tab.addEventListener('click', handleCategoryChange));
-checkoutForm.addEventListener('submit', handleCheckout);
-document.getElementById('whatsapp-order').addEventListener('click', () => {
-  const name = checkoutForm['name'].value.trim();
-  const phone = checkoutForm['phone'].value.trim();
-  const address = checkoutForm['address'].value.trim();
-  const items = getCartItems();
-
-  if (!name || !phone || !address) {
-    alert('Please complete all checkout fields before sending the order to WhatsApp.');
-    return;
-  }
-
-  if (items.length === 0) {
-    alert('Your cart is empty. Add products before placing an order.');
-    return;
-  }
-
-  const totalPrice = calculateSubtotal();
-  const payload = {
-    name,
-    phone,
-    address,
-    products: items.map((item) => ({ id: item.id, name: item.name, quantity: item.quantity, price: item.price })),
-    totalPrice,
-    date: new Date().toISOString(),
-  };
-
-  openWhatsAppOrder(payload);
-});
-
+populateSizeOptions();
 renderProducts();
-renderCart();
-syncBackupOrders();
+selectProduct(selectedProductId);
