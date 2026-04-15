@@ -239,7 +239,7 @@ async function submitOrderHandler() {
     return;
   }
 
-  orderStatus.textContent = 'تم حفظ الطلب في SQL بنجاح!';
+  orderStatus.textContent = 'تم ارسال الطلب بنجاح سوف يقوم المندوب بالتواصل معك خلال 24 ساعه..';
   orderStatus.className = 'order-status success';
   customerName.value = '';
   customerEmail.value = '';
