@@ -11,72 +11,43 @@
 </head>
 <body>
   <div class="page-shell">
-    <header class="topbar">
-      <div class="brand-area">
-        <div class="brand-mark">ع</div>
-        <div>
-          <h1>Shahenda Store</h1>
-          <p>متجر عطور بأسلوب نون وأمازون</p>
+    <header class="app-bar">
+      <button class="icon-button menu-button" aria-label="Menu">☰</button>
+      <div class="brand-block">
+        <span class="brand-mark">ع</span>
+        <div class="brand-copy">
+          <span class="brand-name">OUD</span>
+          <span class="brand-tag">oud-shop.com</span>
         </div>
       </div>
-
-      <div class="search-area">
-        <input id="searchInput" type="search" placeholder="ابحث عن عطر أو ماركة" />
-        <button class="button button-secondary">بحث</button>
-      </div>
-
-      <div class="header-actions">
-        <button class="icon-button" aria-label="Wishlist">♡</button>
-        <button class="icon-button" aria-label="Cart">🛒 <span id="cartCount">0</span></button>
+      <div class="app-actions">
+        <button class="icon-button" aria-label="Search">🔍</button>
+        <button class="icon-button cart-button" aria-label="Cart">🛒<span id="cartCount">0</span></button>
       </div>
     </header>
 
-    <section class="hero-banner">
-      <div class="hero-copy">
-        <p class="eyebrow">عروض اليوم</p>
-        <h2>أقوى تشكيلة عطور عالمية</h2>
-        <p>اختر من بين أفضل المنتجات السريعة والشحن السهل.</p>
-      </div>
-      <div class="hero-note">
-        <span>توصيل سريع</span>
-        <span>لكل الطلبات</span>
-      </div>
-    </section>
-
-    <section class="category-strip">
-      <button class="category-pill active">الأكثر مبيعاً</button>
-      <button class="category-pill">عطور نسائية</button>
-      <button class="category-pill">عطور رجالية</button>
-      <button class="category-pill">عطور فاخرة</button>
-      <button class="category-pill">عروض اليوم</button>
-    </section>
-
-    <section id="collections" class="section products-section">
+    <main class="products-section">
       <div class="section-header">
-        <h2>منتجاتنا</h2>
-        <p>اضغط على أي منتج ليظهر في سلة الطلب.</p>
+        <h2>تسوّق العطور المختارة</h2>
+        <p>أفضل العروض وأشهر الماركات في مكان واحد.</p>
       </div>
       <div class="product-grid" id="productGrid"></div>
-    </section>
 
-    <section id="checkout" class="section checkout-section">
-      <div class="checkout-panel">
-        <div class="panel-header">
-          <h2>سلة الطلب</h2>
-          <p>أضف منتج واحد أو أكثر، ثم أكمل بياناتك وأرسل الطلب.</p>
+      <section class="order-section" id="orderSection">
+        <div class="section-heading">
+          <h3>تفاصيل الطلب</h3>
+          <p>اختر الحجم، نوع العبوة، الكمية، وأرسل الطلب مباشرة.</p>
         </div>
-
-        <div class="order-card" id="orderCard">
-          <div class="order-product-preview">
-            <div class="product-swatch" id="productPlaceholder">ع</div>
-            <div>
-              <p class="eyebrow" id="selectedBrand">Chanel</p>
-              <h3 id="selectedProduct">Chanel No. 5</h3>
-              <p id="selectedDescription">Classic floral aldehyde with elegant depth.</p>
+        <div class="order-panel" id="orderPanel">
+          <div class="order-top">
+            <div class="order-image" id="orderProductImage">ع</div>
+            <div class="order-info">
+              <p class="order-brand" id="orderBrand">اختر منتج</p>
+              <h3 id="orderName">لم يتم اختيار أي منتج بعد</h3>
             </div>
           </div>
 
-          <div class="fields-grid">
+          <div class="order-fields">
             <label>
               الحجم
               <select id="sizeSelect"></select>
@@ -84,7 +55,7 @@
             <label>
               نوع العبوة
               <select id="bottleSelect">
-                <option value="Automatic Bottle">Automatic Bottle</option>
+                <option value="Automatic">Automatic Bottle</option>
                 <option value="Refill">Refill</option>
               </select>
             </label>
@@ -98,19 +69,10 @@
             </label>
           </div>
 
-          <div class="summary-block">
-            <div class="summary-row">
-              <span>السعر</span>
-              <span id="subtotalValue">$0.00</span>
-            </div>
-            <div class="summary-row">
-              <span>الخصم</span>
-              <span id="discountValue">$0.00</span>
-            </div>
-            <div class="summary-row total-row">
-              <span>الإجمالي</span>
-              <span id="totalValue">$0.00</span>
-            </div>
+          <div class="summary-card">
+            <div class="summary-row"><span>السعر</span><span id="subtotalValue">0 EGP</span></div>
+            <div class="summary-row"><span>الخصم</span><span id="discountValue">0 EGP</span></div>
+            <div class="summary-row total-row"><span>الإجمالي</span><span id="totalValue">0 EGP</span></div>
           </div>
 
           <div class="customer-fields">
@@ -126,17 +88,21 @@
               رقم الهاتف
               <input id="customerPhone" type="tel" placeholder="0100xxxxxxx" />
             </label>
-            <label>
-              ملاحظة
-              <textarea id="customerNote" rows="3" placeholder="ملاحظات اضافية"></textarea>
-            </label>
           </div>
 
-          <button id="submitOrder" class="button button-primary">إرسال الطلب</button>
+          <button id="submitOrder" class="button button-primary">تأكيد الطلب</button>
           <div id="orderStatus" class="order-status"></div>
         </div>
-      </div>
-    </section>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <button class="nav-item active"><span>🏬</span><span>Shop</span></button>
+      <button class="nav-item"><span>♡</span><span>Wishlist</span></button>
+      <button class="nav-item"><span>🛒</span><span>Cart</span></button>
+      <button class="nav-item"><span>👤</span><span>Account</span></button>
+      <button class="nav-item"><span>🔍</span><span>Search</span></button>
+    </nav>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/supabase.min.js" defer></script>
