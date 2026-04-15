@@ -1,6 +1,6 @@
 const SUPABASE_URL = 'https://aweuqtiqfxjoflvvturi.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_DIHyv13-yCxgBKIC8PYCvQ_394bcWSE';
-const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const supabaseClient = window.supabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
 const products = [
   { id: 1, name: 'Chanel No. 5', brand: 'Chanel', volume: '90ML', prices: { '30ml': 1290, '60ml': 1990, '90ml': 2590, '120ml': 3190 }, offer: 'BUY 1 GET 1 FREE', discount: 40 },
@@ -29,24 +29,24 @@ const products = [
 
 const sizeOptions = ['30ml', '60ml', '90ml', '120ml'];
 
-const productGrid = document.getElementById('productGrid');
-const orderSection = document.getElementById('orderSection');
-const orderBrand = document.getElementById('orderBrand');
-const orderName = document.getElementById('orderName');
-const orderProductImage = document.getElementById('orderProductImage');
-const sizeSelect = document.getElementById('sizeSelect');
-const bottleSelect = document.getElementById('bottleSelect');
-const quantityInput = document.getElementById('quantityInput');
-const promoInput = document.getElementById('promoInput');
-const subtotalValue = document.getElementById('subtotalValue');
-const discountValue = document.getElementById('discountValue');
-const totalValue = document.getElementById('totalValue');
-const submitOrder = document.getElementById('submitOrder');
-const orderStatus = document.getElementById('orderStatus');
-const customerName = document.getElementById('customerName');
-const customerEmail = document.getElementById('customerEmail');
-const customerPhone = document.getElementById('customerPhone');
-const cartCountElement = document.getElementById('cartCount');
+let productGrid;
+let orderSection;
+let orderBrand;
+let orderName;
+let orderProductImage;
+let sizeSelect;
+let bottleSelect;
+let quantityInput;
+let promoInput;
+let subtotalValue;
+let discountValue;
+let totalValue;
+let submitOrder;
+let orderStatus;
+let customerName;
+let customerEmail;
+let customerPhone;
+let cartCountElement;
 
 let selectedProductId = null;
 let currentDiscount = 0;
@@ -170,7 +170,7 @@ async function submitOrderHandler() {
   submitOrder.textContent = 'جارٍ تأكيد الطلب...';
   orderStatus.textContent = '';
 
-  if (promoCode) {
+  if (promoCode && supabaseClient) {
     const promo = await resolvePromo(promoCode);
     if (promo) {
       currentDiscount = promo.discount_percentage;
@@ -196,6 +196,14 @@ async function submitOrderHandler() {
 
   if (!customer.name || !customer.email) {
     orderStatus.textContent = 'ادخل الاسم والبريد الإلكتروني لإتمام الطلب.';
+    orderStatus.className = 'order-status error';
+    submitOrder.disabled = false;
+    submitOrder.textContent = 'تأكيد الطلب';
+    return;
+  }
+
+  if (!supabaseClient) {
+    orderStatus.textContent = 'فشل الاتصال بقاعدة البيانات. تأكد من اتصالك بالإنترنت.';
     orderStatus.className = 'order-status error';
     submitOrder.disabled = false;
     submitOrder.textContent = 'تأكيد الطلب';
@@ -241,9 +249,31 @@ async function submitOrderHandler() {
   updateSummary();
 }
 
-sizeSelect.addEventListener('change', updateSummary);
-quantityInput.addEventListener('input', updateSummary);
-submitOrder.addEventListener('click', submitOrderHandler);
+document.addEventListener('DOMContentLoaded', () => {
+  productGrid = document.getElementById('productGrid');
+  orderSection = document.getElementById('orderSection');
+  orderBrand = document.getElementById('orderBrand');
+  orderName = document.getElementById('orderName');
+  orderProductImage = document.getElementById('orderProductImage');
+  sizeSelect = document.getElementById('sizeSelect');
+  bottleSelect = document.getElementById('bottleSelect');
+  quantityInput = document.getElementById('quantityInput');
+  promoInput = document.getElementById('promoInput');
+  subtotalValue = document.getElementById('subtotalValue');
+  discountValue = document.getElementById('discountValue');
+  totalValue = document.getElementById('totalValue');
+  submitOrder = document.getElementById('submitOrder');
+  orderStatus = document.getElementById('orderStatus');
+  customerName = document.getElementById('customerName');
+  customerEmail = document.getElementById('customerEmail');
+  customerPhone = document.getElementById('customerPhone');
+  cartCountElement = document.getElementById('cartCount');
 
-renderProducts();
-updateCartCount(0);
+  renderProducts();
+  updateCartCount(0);
+
+  if (sizeSelect) sizeSelect.addEventListener('change', updateSummary);
+  if (quantityInput) quantityInput.addEventListener('input', updateSummary);
+  if (submitOrder) submitOrder.addEventListener('click', submitOrderHandler);
+  window.selectProduct = selectProduct;
+});
