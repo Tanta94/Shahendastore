@@ -3,37 +3,37 @@ const SUPABASE_KEY = 'sb_publishable_DIHyv13-yCxgBKIC8PYCvQ_394bcWSE';
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 const products = [
-  { id: 1, name: 'Chanel No. 5', brand: 'Chanel', description: 'Signature floral elegance.', prices: { '30ml': 89, '60ml': 159, '90ml': 219, '120ml': 279 } },
-  { id: 2, name: 'Coco Mademoiselle', brand: 'Chanel', description: 'Modern orange blossom sophistication.', prices: { '30ml': 95, '60ml': 169, '90ml': 235, '120ml': 295 } },
-  { id: 3, name: 'Good Girl', brand: 'Carolina Herrera', description: 'Bold, seductive, unforgettable.', prices: { '30ml': 79, '60ml': 145, '90ml': 199, '120ml': 255 } },
-  { id: 4, name: 'Miss Dior', brand: 'Dior', description: 'Timeless elegance with luminous florals.', prices: { '30ml': 85, '60ml': 149, '90ml': 215, '120ml': 269 } },
-  { id: 5, name: 'Valentino', brand: 'Valentino', description: 'Italian glamour in a fragrant form.', prices: { '30ml': 82, '60ml': 149, '90ml': 209, '120ml': 269 } },
-  { id: 6, name: 'Black Opium', brand: 'YSL', description: 'Dark coffee and floral gourmand.', prices: { '30ml': 78, '60ml': 145, '90ml': 205, '120ml': 259 } },
-  { id: 7, name: 'La Vie Est Belle', brand: 'Lancôme', description: 'Radiant sweetness with elegant depth.', prices: { '30ml': 72, '60ml': 135, '90ml': 195, '120ml': 245 } },
-  { id: 8, name: 'Dior Sauvage', brand: 'Dior', description: 'Fresh spicy power for the modern man.', prices: { '30ml': 88, '60ml': 159, '90ml': 218, '120ml': 278 } },
-  { id: 9, name: 'Bleu de Chanel', brand: 'Chanel', description: 'Citrus wood with effortless refinement.', prices: { '30ml': 92, '60ml': 165, '90ml': 225, '120ml': 285 } },
-  { id: 10, name: 'Acqua di Giò', brand: 'Giorgio Armani', description: 'Marine freshness meets classic Armani.', prices: { '30ml': 69, '60ml': 129, '90ml': 185, '120ml': 235 } },
-  { id: 11, name: 'Rasasi Hawas for Him', brand: 'Rasasi', description: 'Modern spice and aquatic energy.', prices: { '30ml': 58, '60ml': 109, '90ml': 159, '120ml': 199 } },
-  { id: 12, name: 'One Million', brand: 'Paco Rabanne', description: 'Statement boldness with bright leather.', prices: { '30ml': 72, '60ml': 135, '90ml': 195, '120ml': 245 } },
-  { id: 13, name: '212', brand: 'Carolina Herrera', description: 'Urban freshness tailored for today.', prices: { '30ml': 65, '60ml': 119, '90ml': 169, '120ml': 209 } },
-  { id: 14, name: 'Bad Boy', brand: 'Carolina Herrera', description: 'Rebellious spice and woody charm.', prices: { '30ml': 69, '60ml': 129, '90ml': 179, '120ml': 219 } },
-  { id: 15, name: 'Jean Paul Gaultier', brand: 'Jean Paul Gaultier', description: 'Provocative marine and leather notes.', prices: { '30ml': 76, '60ml': 139, '90ml': 199, '120ml': 255 } },
-  { id: 16, name: 'Stronger With You', brand: 'Emporio Armani', description: 'Spice and sweet comfort for him.', prices: { '30ml': 74, '60ml': 139, '90ml': 195, '120ml': 249 } },
-  { id: 17, name: 'The One', brand: 'Dolce & Gabbana', description: 'Warm amber with elegant sophistication.', prices: { '30ml': 81, '60ml': 149, '90ml': 209, '120ml': 269 } },
-  { id: 18, name: 'Valentino Born In Roma', brand: 'Valentino', description: 'Contemporary freshness with citrus spice.', prices: { '30ml': 84, '60ml': 159, '90ml': 219, '120ml': 279 } },
-  { id: 19, name: 'Elixir', brand: 'Cartier', description: 'Luxury potion of florals and woods.', prices: { '30ml': 91, '60ml': 169, '90ml': 229, '120ml': 289 } },
-  { id: 20, name: 'Azzaro Most Wanted', brand: 'Azzaro', description: 'Fiery spice balanced with soft amber.', prices: { '30ml': 73, '60ml': 139, '90ml': 199, '120ml': 249 } },
-  { id: 21, name: 'Asad', brand: 'Asad', description: 'Exclusive oriental warmth and musk.', prices: { '30ml': 66, '60ml': 125, '90ml': 179, '120ml': 229 } },
-  { id: 22, name: 'Althair', brand: 'Althair', description: 'Smooth oud, citrus, and rich woods.', prices: { '30ml': 64, '60ml': 119, '90ml': 175, '120ml': 225 } },
+  { id: 1, name: 'Chanel No. 5', brand: 'Chanel', volume: '90ML', prices: { '30ml': 1290, '60ml': 1990, '90ml': 2590, '120ml': 3190 }, offer: 'BUY 1 GET 1 FREE', discount: 40 },
+  { id: 2, name: 'Coco Mademoiselle', brand: 'Chanel', volume: '90ML', prices: { '30ml': 1350, '60ml': 2150, '90ml': 2750, '120ml': 3390 }, offer: 'BUY 1 GET 1 FREE', discount: 45 },
+  { id: 3, name: 'Good Girl', brand: 'Carolina Herrera', volume: '80ML', prices: { '30ml': 990, '60ml': 1690, '90ml': 2190, '120ml': 2690 }, offer: 'BEST SELLER', discount: 30 },
+  { id: 4, name: 'Miss Dior', brand: 'Dior', volume: '90ML', prices: { '30ml': 1190, '60ml': 1890, '90ml': 2390, '120ml': 2990 }, offer: 'HOT DEAL', discount: 35 },
+  { id: 5, name: 'Valentino', brand: 'Valentino', volume: '90ML', prices: { '30ml': 1130, '60ml': 1790, '90ml': 2290, '120ml': 2850 }, offer: 'SAVE 25%', discount: 25 },
+  { id: 6, name: 'Black Opium', brand: 'YSL', volume: '90ML', prices: { '30ml': 1090, '60ml': 1790, '90ml': 2290, '120ml': 2790 }, offer: 'SPECIAL', discount: 32 },
+  { id: 7, name: 'La Vie Est Belle', brand: 'Lancôme', volume: '75ML', prices: { '30ml': 1020, '60ml': 1590, '90ml': 2090, '120ml': 2590 }, offer: 'POPULAR', discount: 28 },
+  { id: 8, name: 'Dior Sauvage', brand: 'Dior', volume: '90ML', prices: { '30ml': 1250, '60ml': 1990, '90ml': 2490, '120ml': 2990 }, offer: 'TOP RATED', discount: 30 },
+  { id: 9, name: 'Bleu de Chanel', brand: 'Chanel', volume: '100ML', prices: { '30ml': 1290, '60ml': 1990, '90ml': 2590, '120ml': 3190 }, offer: 'LIMITED', discount: 22 },
+  { id: 10, name: 'Acqua di Giò', brand: 'Giorgio Armani', volume: '90ML', prices: { '30ml': 990, '60ml': 1590, '90ml': 2090, '120ml': 2590 }, offer: 'FRESH PICK', discount: 27 },
+  { id: 11, name: 'Rasasi Hawas for Him', brand: 'Rasasi', volume: '100ML', prices: { '30ml': 790, '60ml': 1290, '90ml': 1690, '120ml': 2190 }, offer: 'NEW ARRIVAL', discount: 20 },
+  { id: 12, name: 'One Million', brand: 'Paco Rabanne', volume: '100ML', prices: { '30ml': 930, '60ml': 1490, '90ml': 1890, '120ml': 2290 }, offer: 'OFFER', discount: 33 },
+  { id: 13, name: '212', brand: 'Carolina Herrera', volume: '90ML', prices: { '30ml': 850, '60ml': 1290, '90ml': 1690, '120ml': 2090 }, offer: 'BEST SELLER', discount: 29 },
+  { id: 14, name: 'Bad Boy', brand: 'Carolina Herrera', volume: '90ML', prices: { '30ml': 890, '60ml': 1390, '90ml': 1790, '120ml': 2190 }, offer: 'HOT DEAL', discount: 30 },
+  { id: 15, name: 'Jean Paul Gaultier', brand: 'Jean Paul Gaultier', volume: '125ML', prices: { '30ml': 980, '60ml': 1590, '90ml': 1990, '120ml': 2490 }, offer: 'BUY 1 GET 1 FREE', discount: 40 },
+  { id: 16, name: 'Stronger With You', brand: 'Emporio Armani', volume: '100ML', prices: { '30ml': 930, '60ml': 1490, '90ml': 1890, '120ml': 2390 }, offer: 'POPULAR', discount: 26 },
+  { id: 17, name: 'The One', brand: 'Dolce & Gabbana', volume: '90ML', prices: { '30ml': 980, '60ml': 1590, '90ml': 1990, '120ml': 2490 }, offer: 'SAVE 29%', discount: 29 },
+  { id: 18, name: 'Valentino Born In Roma', brand: 'Valentino', volume: '90ML', prices: { '30ml': 1050, '60ml': 1690, '90ml': 2190, '120ml': 2690 }, offer: 'NEW EDITION', discount: 24 },
+  { id: 19, name: 'Elixir', brand: 'Cartier', volume: '90ML', prices: { '30ml': 1180, '60ml': 1790, '90ml': 2290, '120ml': 2790 }, offer: 'LUXURY', discount: 30 },
+  { id: 20, name: 'Azzaro Most Wanted', brand: 'Azzaro', volume: '100ML', prices: { '30ml': 880, '60ml': 1390, '90ml': 1890, '120ml': 2390 }, offer: 'POPULAR', discount: 31 },
+  { id: 21, name: 'Asad', brand: 'Asad', volume: '90ML', prices: { '30ml': 820, '60ml': 1290, '90ml': 1690, '120ml': 2090 }, offer: 'EXCLUSIVE', discount: 22 },
+  { id: 22, name: 'Althair', brand: 'Althair', volume: '90ML', prices: { '30ml': 780, '60ml': 1190, '90ml': 1690, '120ml': 2090 }, offer: 'ORIENTAL', discount: 25 }
 ];
 
 const sizeOptions = ['30ml', '60ml', '90ml', '120ml'];
 
 const productGrid = document.getElementById('productGrid');
-const selectedBrand = document.getElementById('selectedBrand');
-const selectedProduct = document.getElementById('selectedProduct');
-const selectedDescription = document.getElementById('selectedDescription');
-const productPlaceholder = document.getElementById('productPlaceholder');
+const orderSection = document.getElementById('orderSection');
+const orderBrand = document.getElementById('orderBrand');
+const orderName = document.getElementById('orderName');
+const orderProductImage = document.getElementById('orderProductImage');
 const sizeSelect = document.getElementById('sizeSelect');
 const bottleSelect = document.getElementById('bottleSelect');
 const quantityInput = document.getElementById('quantityInput');
@@ -46,60 +46,64 @@ const orderStatus = document.getElementById('orderStatus');
 const customerName = document.getElementById('customerName');
 const customerEmail = document.getElementById('customerEmail');
 const customerPhone = document.getElementById('customerPhone');
-const customerNote = document.getElementById('customerNote');
-let selectedProductId = products[0].id;
+const cartCountElement = document.getElementById('cartCount');
+
+let selectedProductId = null;
 let currentDiscount = 0;
 let currentPromoCode = '';
 let cartCount = 0;
 
+function formatPrice(value) {
+  return `${value.toLocaleString('en-US')} EGP`;
+}
+
+function getProductById(id) {
+  return products.find((product) => product.id === id);
+}
+
 function renderProducts() {
-  productGrid.innerHTML = '';
-  products.forEach((product) => {
-    const card = document.createElement('article');
-    card.className = 'product-card';
-    const volume = '90ML';
-    const price = product.prices['90ml'];
-    const oldPrice = (price * 1.25).toFixed(0);
-    card.innerHTML = `
-      <div class="product-image">${product.brand.slice(0, 1)}<span class="price-tag">${volume}</span></div>
-      <div class="product-content">
-        <h3 class="product-title">${product.name}</h3>
-        <p class="product-subtitle">${product.brand}</p>
-        <div class="price-row">
-          <span class="price-old">$${oldPrice}</span>
-          <span class="price-current">$${price.toFixed(2)}</span>
-        </div>
-      </div>
-      <div class="product-footer">
-        <button class="button button-primary">أضف إلى العربة</button>
-      </div>
-    `;
-    const button = card.querySelector('button');
-    button.addEventListener('click', () => addToCart(product.id));
-    productGrid.appendChild(card);
-  });
+  productGrid.innerHTML = products
+    .map((product) => {
+      const price = product.prices['90ml'];
+      const oldPrice = Math.round(price * 1.35);
+      return `
+        <article class="product-card">
+          <div class="product-badge">${product.offer}</div>
+          <div class="product-discount">-${product.discount}%</div>
+          <div class="product-image">
+            ${product.brand.slice(0, 1)}
+            <span class="volume-label">${product.volume}</span>
+          </div>
+          <div class="product-content">
+            <h3 class="product-title">${product.brand} ${product.name}</h3>
+            <p class="product-subtitle">${product.brand} For Men</p>
+            <div class="price-row">
+              <span class="price-old">${formatPrice(oldPrice)}</span>
+              <span class="price-current">${formatPrice(price)}</span>
+            </div>
+          </div>
+          <div class="product-footer">
+            <button type="button" onclick="selectProduct(${product.id})">طلب الآن</button>
+          </div>
+        </article>
+      `;
+    })
+    .join('');
 }
 
-function populateSizeOptions() {
-  sizeSelect.innerHTML = sizeOptions.map((size) => `<option value="${size}">${size}</option>`).join('');
+function updateCartCount(value) {
+  cartCountElement.textContent = value;
 }
 
-function formatCurrency(value) {
-  return `$${value.toFixed(2)}`;
-}
-
-function getSelectedProduct() {
-  return products.find((item) => item.id === selectedProductId);
-}
-
-function selectProduct(id) {
-  selectedProductId = id;
-  const product = getSelectedProduct();
-  selectedBrand.textContent = product.brand;
-  selectedProduct.textContent = product.name;
-  selectedDescription.textContent = product.description;
-  productPlaceholder.textContent = product.brand.slice(0, 1);
-  sizeSelect.value = '30ml';
+function showSelectedProduct(product) {
+  orderSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  orderBrand.textContent = product.brand;
+  orderName.textContent = `${product.brand} ${product.name}`;
+  orderProductImage.textContent = product.brand.slice(0, 1);
+  sizeSelect.innerHTML = sizeOptions
+    .map((size) => `<option value="${size}">${size}</option>`)
+    .join('');
+  sizeSelect.value = '90ml';
   quantityInput.value = 1;
   promoInput.value = '';
   currentDiscount = 0;
@@ -107,20 +111,37 @@ function selectProduct(id) {
   updateSummary();
 }
 
-function updateSummary() {
-  const product = getSelectedProduct();
-  const size = sizeSelect.value;
-  const quantity = Math.max(1, Number(quantityInput.value));
-  const unitPrice = product.prices[size] || product.prices['30ml'];
-  const subtotal = unitPrice * quantity;
-  const discountAmount = (subtotal * currentDiscount) / 100;
-  const total = subtotal - discountAmount;
-  subtotalValue.textContent = formatCurrency(subtotal);
-  discountValue.textContent = formatCurrency(discountAmount);
-  totalValue.textContent = formatCurrency(total);
+function selectProduct(id) {
+  selectedProductId = id;
+  const product = getProductById(id);
+  if (!product) return;
+  showSelectedProduct(product);
+  cartCount += 1;
+  updateCartCount(cartCount);
+  orderStatus.textContent = `تم اختيار ${product.brand} ${product.name}`;
+  orderStatus.className = 'order-status success';
 }
 
-async function fetchPromoCode(code) {
+function updateSummary() {
+  if (!selectedProductId) {
+    subtotalValue.textContent = '0 EGP';
+    discountValue.textContent = '0 EGP';
+    totalValue.textContent = '0 EGP';
+    return;
+  }
+  const product = getProductById(selectedProductId);
+  const size = sizeSelect.value;
+  const quantity = Math.max(1, Number(quantityInput.value));
+  const unitPrice = product.prices[size] || product.prices['90ml'];
+  const subtotal = unitPrice * quantity;
+  const discountAmount = Math.round((subtotal * currentDiscount) / 100);
+  const total = subtotal - discountAmount;
+  subtotalValue.textContent = formatPrice(subtotal);
+  discountValue.textContent = formatPrice(discountAmount);
+  totalValue.textContent = formatPrice(total);
+}
+
+async function resolvePromo(code) {
   if (!code) return null;
   const { data, error } = await supabaseClient
     .from('promo_codes')
@@ -128,110 +149,101 @@ async function fetchPromoCode(code) {
     .eq('code', code.trim().toUpperCase())
     .eq('active', true)
     .single();
-  if (error || !data) return null;
-  return data;
-}
-
-async function handlePromoValidation() {
-  const code = promoInput.value.trim().toUpperCase();
-  if (!code) {
-    currentDiscount = 0;
-    currentPromoCode = '';
-    orderStatus.textContent = '';
-    updateSummary();
-    return;
-  }
-  orderStatus.textContent = 'جارٍ التحقق من كود الخصم...';
-  const promo = await fetchPromoCode(code);
-  if (promo) {
-    currentDiscount = promo.discount_percentage;
-    currentPromoCode = promo.code;
-    orderStatus.textContent = `تم تطبيق الخصم ${currentDiscount}%`;
-    orderStatus.className = 'order-status success';
-  } else {
-    currentDiscount = 0;
-    currentPromoCode = '';
-    orderStatus.textContent = 'الكود غير صحيح أو منتهي.';
-    orderStatus.className = 'order-status error';
-  }
-  updateSummary();
+  return error || !data ? null : data;
 }
 
 async function submitOrderHandler() {
-  const product = getSelectedProduct();
+  if (!selectedProductId) {
+    orderStatus.textContent = 'اختر منتجاً أولاً.';
+    orderStatus.className = 'order-status error';
+    return;
+  }
+  const product = getProductById(selectedProductId);
   const size = sizeSelect.value;
   const bottleType = bottleSelect.value;
   const quantity = Math.max(1, Number(quantityInput.value));
-  const unitPrice = product.prices[size] || product.prices['30ml'];
+  const unitPrice = product.prices[size] || product.prices['90ml'];
   const subtotal = unitPrice * quantity;
-  const discountAmount = (subtotal * currentDiscount) / 100;
+  const promoCode = promoInput.value.trim().toUpperCase();
+
+  submitOrder.disabled = true;
+  submitOrder.textContent = 'جارٍ تأكيد الطلب...';
+  orderStatus.textContent = '';
+
+  if (promoCode) {
+    const promo = await resolvePromo(promoCode);
+    if (promo) {
+      currentDiscount = promo.discount_percentage;
+      currentPromoCode = promo.code;
+    } else {
+      currentDiscount = 0;
+      currentPromoCode = null;
+    }
+  } else {
+    currentDiscount = 0;
+    currentPromoCode = null;
+  }
+
+  updateSummary();
+
+  const discountAmount = Math.round((subtotal * currentDiscount) / 100);
   const total = subtotal - discountAmount;
   const customer = {
     name: customerName.value.trim(),
     email: customerEmail.value.trim(),
     phone: customerPhone.value.trim(),
-    note: customerNote.value.trim(),
   };
+
   if (!customer.name || !customer.email) {
-    orderStatus.textContent = 'اكتب الاسم والبريد عشان نكمل.';
+    orderStatus.textContent = 'ادخل الاسم والبريد الإلكتروني لإتمام الطلب.';
     orderStatus.className = 'order-status error';
+    submitOrder.disabled = false;
+    submitOrder.textContent = 'تأكيد الطلب';
     return;
   }
-  submitOrder.disabled = true;
-  submitOrder.textContent = 'جارٍ حفظ الطلب...';
-  orderStatus.textContent = '';
-  const { error } = await supabaseClient.from('orders').insert([{ 
-    product_name: product.name,
-    brand: product.brand,
-    size,
-    bottle_type: bottleType,
-    quantity,
-    unit_price: unitPrice,
-    subtotal,
-    promo_code: currentPromoCode || null,
-    discount_amount: discountAmount,
-    total,
-    customer_name: customer.name,
-    customer_email: customer.email,
-    customer_phone: customer.phone || null,
-    order_note: customer.note || null,
-  }]);
+
+  const { error } = await supabaseClient.from('orders').insert([
+    {
+      product_name: product.name,
+      brand: product.brand,
+      size,
+      bottle_type: bottleType,
+      quantity,
+      unit_price: unitPrice,
+      subtotal,
+      promo_code: currentPromoCode || null,
+      discount_amount: discountAmount,
+      total,
+      customer_name: customer.name,
+      customer_email: customer.email,
+      customer_phone: customer.phone || null,
+    },
+  ]);
+
   submitOrder.disabled = false;
-  submitOrder.textContent = 'إرسال الطلب';
+  submitOrder.textContent = 'تأكيد الطلب';
+
   if (error) {
-    orderStatus.textContent = 'حدث خطأ، حاول مرة ثانية.';
+    orderStatus.textContent = 'فشل في حفظ الطلب. حاول مرة أخرى.';
     orderStatus.className = 'order-status error';
-    console.error('Supabase error:', error);
+    console.error(error);
     return;
   }
-  orderStatus.textContent = 'تم حفظ الطلب بنجاح!';
+
+  orderStatus.textContent = 'تم حفظ الطلب في SQL بنجاح!';
   orderStatus.className = 'order-status success';
   customerName.value = '';
   customerEmail.value = '';
   customerPhone.value = '';
-  customerNote.value = '';
-}
-
-function updateCartCount(count) {
-  const cartCountElement = document.getElementById('cartCount');
-  cartCountElement.textContent = count;
-}
-
-function addToCart(productId) {
-  selectProduct(productId);
-  cartCount += 1;
-  updateCartCount(cartCount);
-  orderStatus.textContent = 'تمت إضافة المنتج إلى العربة.';
-  orderStatus.className = 'order-status success';
+  promoInput.value = '';
+  currentDiscount = 0;
+  currentPromoCode = '';
+  updateSummary();
 }
 
 sizeSelect.addEventListener('change', updateSummary);
 quantityInput.addEventListener('input', updateSummary);
-bottleSelect.addEventListener('change', updateSummary);
-promoInput.addEventListener('change', handlePromoValidation);
 submitOrder.addEventListener('click', submitOrderHandler);
 
-populateSizeOptions();
 renderProducts();
-selectProduct(selectedProductId);
-updateCartCount(cartCount);
+updateCartCount(0);
