@@ -53,26 +53,32 @@ const customerNote = document.getElementById('customerNote');
 let selectedProductId = products[0].id;
 let currentDiscount = 0;
 let currentPromoCode = '';
+let cartCount = 0;
 
 function renderProducts() {
   productGrid.innerHTML = '';
   products.forEach((product) => {
     const card = document.createElement('article');
     card.className = 'product-card';
+    const volume = '90ML';
+    const price = product.prices['90ml'];
+    const oldPrice = (price * 1.3).toFixed(0);
     card.innerHTML = `
-      <div class="product-art">${product.brand.slice(0, 1)}</div>
-      <div>
-        <h3>${product.name}</h3>
-        <p>${product.description}</p>
+      <div class="product-art" data-volume="${volume}">${product.brand.slice(0, 1)}</div>
+      <div class="product-content">
+        <h3 class="product-title">${product.name}</h3>
+        <p class="product-subtitle">${product.brand}</p>
+        <div class="price-row">
+          <span class="price-old">$${oldPrice}</span>
+          <span class="price-current">$${price.toFixed(2)}</span>
+        </div>
       </div>
-      <div class="product-meta">
-        <span>${product.brand}</span>
-        <strong>$${product.prices['30ml'].toFixed(2)}</strong>
+      <div class="product-footer">
+        <button class="button button-primary">Add to cart</button>
       </div>
-      <button class="button button-secondary">Select</button>
     `;
-    const selectButton = card.querySelector('button');
-    selectButton.addEventListener('click', () => selectProduct(product.id));
+    const button = card.querySelector('button');
+    button.addEventListener('click', () => addToCart(product.id));
     productGrid.appendChild(card);
   });
 }
@@ -202,7 +208,7 @@ async function submitOrderHandler() {
   }]);
 
   submitOrder.disabled = false;
-  submitOrder.textContent = 'Place Secure Order';
+  submitOrder.textContent = 'إرسال الطلب';
 
   if (error) {
     orderStatus.textContent = 'Unable to save order. Please try again later.';
@@ -219,6 +225,19 @@ async function submitOrderHandler() {
   customerNote.value = '';
 }
 
+function updateCartCount(count) {
+  const cartCountElement = document.getElementById('cartCount');
+  cartCountElement.textContent = count;
+}
+
+function addToCart(productId) {
+  selectProduct(productId);
+  cartCount += 1;
+  updateCartCount(cartCount);
+  orderStatus.textContent = 'تمت إضافة المنتج إلى العربة. اكمل بياناتك ثم أرسل الطلب.';
+  orderStatus.className = 'order-status success';
+}
+
 sizeSelect.addEventListener('change', updateSummary);
 quantityInput.addEventListener('input', updateSummary);
 bottleSelect.addEventListener('change', updateSummary);
@@ -228,3 +247,4 @@ submitOrder.addEventListener('click', submitOrderHandler);
 populateSizeOptions();
 renderProducts();
 selectProduct(selectedProductId);
+updateCartCount(cartCount);
