@@ -2,32 +2,74 @@ const SUPABASE_URL = 'https://aweuqtiqfxjoflvvturi.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_DIHyv13-yCxgBKIC8PYCvQ_394bcWSE';
 const supabaseClient = typeof supabase !== 'undefined' && supabase.createClient ? supabase.createClient(SUPABASE_URL, SUPABASE_KEY) : null;
 
-const products = [
-  { id: 1, name: 'Chanel No. 5', brand: 'Chanel', volume: '90ML', prices: { '30ml': 1290, '60ml': 1990, '90ml': 2590, '120ml': 3190 }, offer: 'BUY 1 GET 1 FREE', discount: 40 },
-  { id: 2, name: 'Coco Mademoiselle', brand: 'Chanel', volume: '90ML', prices: { '30ml': 1350, '60ml': 2150, '90ml': 2750, '120ml': 3390 }, offer: 'BUY 1 GET 1 FREE', discount: 45 },
-  { id: 3, name: 'Good Girl', brand: 'Carolina Herrera', volume: '80ML', prices: { '30ml': 990, '60ml': 1690, '90ml': 2190, '120ml': 2690 }, offer: 'BEST SELLER', discount: 30 },
-  { id: 4, name: 'Miss Dior', brand: 'Dior', volume: '90ML', prices: { '30ml': 1190, '60ml': 1890, '90ml': 2390, '120ml': 2990 }, offer: 'HOT DEAL', discount: 35 },
-  { id: 5, name: 'Valentino', brand: 'Valentino', volume: '90ML', prices: { '30ml': 1130, '60ml': 1790, '90ml': 2290, '120ml': 2850 }, offer: 'SAVE 25%', discount: 25 },
-  { id: 6, name: 'Black Opium', brand: 'YSL', volume: '90ML', prices: { '30ml': 1090, '60ml': 1790, '90ml': 2290, '120ml': 2790 }, offer: 'SPECIAL', discount: 32 },
-  { id: 7, name: 'La Vie Est Belle', brand: 'Lancôme', volume: '75ML', prices: { '30ml': 1020, '60ml': 1590, '90ml': 2090, '120ml': 2590 }, offer: 'POPULAR', discount: 28 },
-  { id: 8, name: 'Dior Sauvage', brand: 'Dior', volume: '90ML', prices: { '30ml': 1250, '60ml': 1990, '90ml': 2490, '120ml': 2990 }, offer: 'TOP RATED', discount: 30 },
-  { id: 9, name: 'Bleu de Chanel', brand: 'Chanel', volume: '100ML', prices: { '30ml': 1290, '60ml': 1990, '90ml': 2590, '120ml': 3190 }, offer: 'LIMITED', discount: 22 },
-  { id: 10, name: 'Acqua di Giò', brand: 'Giorgio Armani', volume: '90ML', prices: { '30ml': 990, '60ml': 1590, '90ml': 2090, '120ml': 2590 }, offer: 'FRESH PICK', discount: 27 },
-  { id: 11, name: 'Rasasi Hawas for Him', brand: 'Rasasi', volume: '100ML', prices: { '30ml': 790, '60ml': 1290, '90ml': 1690, '120ml': 2190 }, offer: 'NEW ARRIVAL', discount: 20 },
-  { id: 12, name: 'One Million', brand: 'Paco Rabanne', volume: '100ML', prices: { '30ml': 930, '60ml': 1490, '90ml': 1890, '120ml': 2290 }, offer: 'OFFER', discount: 33 },
-  { id: 13, name: '212', brand: 'Carolina Herrera', volume: '90ML', prices: { '30ml': 850, '60ml': 1290, '90ml': 1690, '120ml': 2090 }, offer: 'BEST SELLER', discount: 29 },
-  { id: 14, name: 'Bad Boy', brand: 'Carolina Herrera', volume: '90ML', prices: { '30ml': 890, '60ml': 1390, '90ml': 1790, '120ml': 2190 }, offer: 'HOT DEAL', discount: 30 },
-  { id: 15, name: 'Jean Paul Gaultier', brand: 'Jean Paul Gaultier', volume: '125ML', prices: { '30ml': 980, '60ml': 1590, '90ml': 1990, '120ml': 2490 }, offer: 'BUY 1 GET 1 FREE', discount: 40 },
-  { id: 16, name: 'Stronger With You', brand: 'Emporio Armani', volume: '100ML', prices: { '30ml': 930, '60ml': 1490, '90ml': 1890, '120ml': 2390 }, offer: 'POPULAR', discount: 26 },
-  { id: 17, name: 'The One', brand: 'Dolce & Gabbana', volume: '90ML', prices: { '30ml': 980, '60ml': 1590, '90ml': 1990, '120ml': 2490 }, offer: 'SAVE 29%', discount: 29 },
-  { id: 18, name: 'Valentino Born In Roma', brand: 'Valentino', volume: '90ML', prices: { '30ml': 1050, '60ml': 1690, '90ml': 2190, '120ml': 2690 }, offer: 'NEW EDITION', discount: 24 },
-  { id: 19, name: 'Elixir', brand: 'Cartier', volume: '90ML', prices: { '30ml': 1180, '60ml': 1790, '90ml': 2290, '120ml': 2790 }, offer: 'LUXURY', discount: 30 },
-  { id: 20, name: 'Azzaro Most Wanted', brand: 'Azzaro', volume: '100ML', prices: { '30ml': 880, '60ml': 1390, '90ml': 1890, '120ml': 2390 }, offer: 'POPULAR', discount: 31 },
-  { id: 21, name: 'Asad', brand: 'Asad', volume: '90ML', prices: { '30ml': 820, '60ml': 1290, '90ml': 1690, '120ml': 2090 }, offer: 'EXCLUSIVE', discount: 22 },
-  { id: 22, name: 'Althair', brand: 'Althair', volume: '90ML', prices: { '30ml': 780, '60ml': 1190, '90ml': 1690, '120ml': 2090 }, offer: 'ORIENTAL', discount: 25 }
-];
+// أضف image لكل منتج: image: 'https://example.com/path/to-image.jpg'
+const sizeOptions = ['30ml', '50ml', '100ml'];
 
-const sizeOptions = ['30ml', '60ml', '90ml', '120ml'];
+// أضف image لكل منتج: image: 'https://example.com/path/to-image.jpg'
+const products = [
+  // Men / Unisex
+  { id: 1, name: 'Black XS', brand: 'Paco Rabanne', category: 'Men/Unisex', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 2, name: 'Black XS L\'Exces', brand: 'Paco Rabanne', category: 'Men/Unisex', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 3, name: 'Chrome', brand: 'Azzaro', category: 'Men/Unisex', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 4, name: 'Asad', brand: 'Lattafa', category: 'Men/Unisex', prices: { '30ml': 350, '50ml': 450, '100ml': 650 } },
+  { id: 5, name: 'Sauvage', brand: 'Dior', category: 'Men/Unisex', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 6, name: 'Bleu de Chanel', brand: 'Chanel', category: 'Men/Unisex', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 7, name: 'Acqua di Giò', brand: 'Giorgio Armani', category: 'Men/Unisex', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 8, name: 'Hawas', brand: 'Rasasi', category: 'Men/Unisex', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 9, name: 'One Million', brand: 'Paco Rabanne', category: 'Men/Unisex', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 10, name: '212', brand: 'Carolina Herrera', category: 'Men/Unisex', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 11, name: 'Bad Boy', brand: 'Carolina Herrera', category: 'Men/Unisex', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 12, name: 'Jean Paul Gaultier', brand: 'Jean Paul Gaultier', category: 'Men/Unisex', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 13, name: 'Silver Scent', brand: 'Jacques Bogart', category: 'Men/Unisex', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 14, name: 'Kenzo', brand: 'Kenzo', category: 'Men/Unisex', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 15, name: 'Stronger with you', brand: 'Emporio Armani', category: 'Men/Unisex', prices: { '30ml': 350, '50ml': 450, '100ml': 650 } },
+  // Women
+  { id: 16, name: 'Baccarat Rouge 540', brand: 'Maison Francis Kurkdjian', category: 'Women', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 17, name: 'Black Opium', brand: 'Yves Saint Laurent', category: 'Women', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 18, name: 'Libre', brand: 'Yves Saint Laurent', category: 'Women', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 19, name: 'La Vie Est Belle', brand: 'Lancôme', category: 'Women', prices: { '30ml': 400, '50ml': 500, '100ml': 700 } },
+  { id: 20, name: 'Good Girl', brand: 'Carolina Herrera', category: 'Women', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 21, name: 'Miss Dior', brand: 'Dior', category: 'Women', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 22, name: 'Valentino Donna', brand: 'Valentino', category: 'Women', prices: { '30ml': 400, '50ml': 500, '100ml': 700 } },
+  { id: 23, name: 'Valentino Born in Roma', brand: 'Valentino', category: 'Women', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 24, name: 'Chanel No.5', brand: 'Chanel', category: 'Women', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 25, name: 'Yara pink perfume', brand: 'Yara', category: 'Women', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 26, name: 'Dior Jadore', brand: 'Dior', category: 'Women', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 27, name: 'Chanel Coco Mademoiselle', brand: 'Chanel', category: 'Women', prices: { '30ml': 350, '50ml': 450, '100ml': 650 } },
+  { id: 28, name: 'Gucci Bloom', brand: 'Gucci', category: 'Women', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 29, name: 'Armani Si', brand: 'Giorgio Armani', category: 'Women', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 30, name: 'Lancome Tresor Midnight Rose', brand: 'Lancôme', category: 'Women', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  // Musk / Oud / Special
+  { id: 31, name: 'White Musk', brand: 'Musk', category: 'Musk/Oud/Special', prices: { '30ml': 400, '50ml': 500, '100ml': 700 } },
+  { id: 32, name: 'Pomegranate Musk', brand: 'Musk', category: 'Musk/Oud/Special', prices: { '30ml': 400, '50ml': 500, '100ml': 700 } },
+  { id: 33, name: 'Choco Musk', brand: 'Al Rehab', category: 'Musk/Oud/Special', prices: { '30ml': 400, '50ml': 500, '100ml': 700 } },
+  { id: 34, name: 'Oud Al Zahra', brand: 'Oud', category: 'Musk/Oud/Special', prices: { '30ml': 400, '50ml': 500, '100ml': 700 } },
+  { id: 35, name: 'Musk Tahara', brand: 'Musk', category: 'Musk/Oud/Special', prices: { '30ml': 400, '50ml': 500, '100ml': 700 } },
+  { id: 36, name: 'Amber Musk', brand: 'Musk', category: 'Musk/Oud/Special', prices: { '30ml': 400, '50ml': 500, '100ml': 700 } },
+  { id: 37, name: 'Oud Wood style', brand: 'Oud', category: 'Musk/Oud/Special', prices: { '30ml': 400, '50ml': 500, '100ml': 700 } },
+  { id: 38, name: 'Oud Vanilla', brand: 'Oud', category: 'Musk/Oud/Special', prices: { '30ml': 400, '50ml': 500, '100ml': 700 } },
+  { id: 39, name: 'Oud Rose', brand: 'Oud', category: 'Musk/Oud/Special', prices: { '30ml': 400, '50ml': 500, '100ml': 700 } },
+  // Bad Boy variants
+  { id: 40, name: 'Bad Boy EDT (Original)', brand: 'Carolina Herrera', category: 'Special', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  { id: 41, name: 'Bad Boy Cobalt', brand: 'Carolina Herrera', category: 'Special', prices: { '30ml': 350, '50ml': 450, '100ml': 550 } },
+  { id: 42, name: 'Bad Boy Extreme', brand: 'Carolina Herrera', category: 'Special', prices: { '30ml': 500, '50ml': 600, '100ml': 850 } },
+  { id: 43, name: 'Bad Boy Le Parfum', brand: 'Carolina Herrera', category: 'Special', prices: { '30ml': 600, '50ml': 700, '100ml': 800 } },
+  { id: 44, name: 'Bad Boy Elixir', brand: 'Carolina Herrera', category: 'Special', prices: { '30ml': 500, '50ml': 600, '100ml': 700 } },
+  // Kayali
+  { id: 45, name: 'Kayali', brand: 'Kayali', category: 'Women', prices: { '30ml': 300, '50ml': 400, '100ml': 600 } },
+  // 212 Women
+  { id: 46, name: '212 NYC Women', brand: 'Carolina Herrera', category: 'Women', prices: { '30ml': 400, '50ml': 500, '100ml': 700 } },
+  { id: 47, name: '212 Sexy Women', brand: 'Carolina Herrera', category: 'Women', prices: { '30ml': 400, '50ml': 500, '100ml': 700 } },
+  { id: 48, name: '212 VIP Women', brand: 'Carolina Herrera', category: 'Women', prices: { '30ml': 400, '50ml': 500, '100ml': 700 } },
+  { id: 49, name: '212 VIP Rosé', brand: 'Carolina Herrera', category: 'Women', prices: { '30ml': 400, '50ml': 500, '100ml': 700 } },
+  { id: 50, name: '212 VIP Rosé Elixir', brand: 'Carolina Herrera', category: 'Women', prices: { '30ml': 400, '50ml': 500, '100ml': 700 } },
+  // 212 Men
+  { id: 51, name: '212 Men NYC', brand: 'Carolina Herrera', category: 'Men/Unisex', prices: { '30ml': 400, '50ml': 500, '100ml': 700 } },
+  { id: 52, name: '212 VIP Men', brand: 'Carolina Herrera', category: 'Men/Unisex', prices: { '30ml': 400, '50ml': 500, '100ml': 700 } },
+  { id: 53, name: '212 VIP Black', brand: 'Carolina Herrera', category: 'Men/Unisex', prices: { '30ml': 400, '50ml': 500, '100ml': 700 } },
+  { id: 54, name: '212 Sexy Men', brand: 'Carolina Herrera', category: 'Men/Unisex', prices: { '30ml': 400, '50ml': 500, '100ml': 700 } },
+  { id: 55, name: '212 Heroes', brand: 'Carolina Herrera', category: 'Men/Unisex', prices: { '30ml': 400, '50ml': 500, '100ml': 700 } }
+];
 
 let productGrid;
 let orderSection;
@@ -64,21 +106,18 @@ function getProductById(id) {
 function renderProducts() {
   productGrid.innerHTML = products
     .map((product) => {
-      const price = product.prices['90ml'];
-      const oldPrice = Math.round(price * 1.35);
+      const price = product.prices['100ml'];
+      const imageUrl = product.image || `https://via.placeholder.com/320x240.png?text=${encodeURIComponent(product.name)}`;
       return `
         <article class="product-card">
-          <div class="product-badge">${product.offer}</div>
-          <div class="product-discount">-${product.discount}%</div>
           <div class="product-image">
-            ${product.brand.slice(0, 1)}
-            <span class="volume-label">${product.volume}</span>
+            <img src="${imageUrl}" alt="${product.name}" loading="lazy" />
+            <span class="volume-label">${product.volume || '100ml'}</span>
           </div>
           <div class="product-content">
             <h3 class="product-title">${product.brand} ${product.name}</h3>
-            <p class="product-subtitle">${product.brand} For Men</p>
+            <p class="product-subtitle">${product.category}</p>
             <div class="price-row">
-              <span class="price-old">${formatPrice(oldPrice)}</span>
               <span class="price-current">${formatPrice(price)}</span>
             </div>
           </div>
@@ -99,11 +138,12 @@ function showSelectedProduct(product) {
   orderSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
   orderBrand.textContent = product.brand;
   orderName.textContent = `${product.brand} ${product.name}`;
-  orderProductImage.textContent = product.brand.slice(0, 1);
+  const imageUrl = product.image || `https://via.placeholder.com/84x84.png?text=${encodeURIComponent(product.name)}`;
+  orderProductImage.innerHTML = `<img src="${imageUrl}" alt="${product.name}" loading="lazy" />`;
   sizeSelect.innerHTML = sizeOptions
     .map((size) => `<option value="${size}">${size}</option>`)
     .join('');
-  sizeSelect.value = '90ml';
+  sizeSelect.value = '100ml';
   quantityInput.value = 1;
   promoInput.value = '';
   currentDiscount = 0;
@@ -132,7 +172,7 @@ function updateSummary() {
   const product = getProductById(selectedProductId);
   const size = sizeSelect.value;
   const quantity = Math.max(1, Number(quantityInput.value));
-  const unitPrice = product.prices[size] || product.prices['90ml'];
+  const unitPrice = product.prices[size] || product.prices['100ml'];
   const subtotal = unitPrice * quantity;
   const discountAmount = Math.round((subtotal * currentDiscount) / 100);
   const total = subtotal - discountAmount;
@@ -162,7 +202,7 @@ async function submitOrderHandler() {
   const size = sizeSelect.value;
   const bottleType = bottleSelect.value;
   const quantity = Math.max(1, Number(quantityInput.value));
-  const unitPrice = product.prices[size] || product.prices['90ml'];
+  const unitPrice = product.prices[size] || product.prices['100ml'];
   const subtotal = unitPrice * quantity;
   const promoCode = promoInput.value.trim().toUpperCase();
 
@@ -239,7 +279,7 @@ async function submitOrderHandler() {
     return;
   }
 
-  orderStatus.textContent = 'تم ارسال الطلب بنجاح سوف يقوم المندوب بالتواصل معك خلال 24 ساعه..';
+  orderStatus.textContent = 'تم حفظ الطلب في SQL بنجاح!';
   orderStatus.className = 'order-status success';
   customerName.value = '';
   customerEmail.value = '';
