@@ -113,6 +113,7 @@ function renderProducts() {
           <div class="product-image">
             <img src="${imageUrl}" alt="${product.name}" loading="lazy" />
             <span class="volume-label">${product.volume || '100ml'}</span>
+            <span class="offer-badge">اشتر 2 احصل على 1 مجاني</span>
           </div>
           <div class="product-content">
             <h3 class="product-title">${product.brand} ${product.name}</h3>
