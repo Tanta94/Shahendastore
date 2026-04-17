@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="htmlRoot">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>لوحة التحكم - Shahenda Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="app-bar">
+      <div class="brand-block">
+        <span class="brand-mark">S</span>
+        <div class="brand-copy">
+          <span class="brand-name">Shahenda Store</span>
+          <span class="brand-tag">لوحة التحكم</span>
+        </div>
+      </div>
+      <div class="app-actions">
+        <button class="icon-button" onclick="window.location.href='index.html'" aria-label="العودة للمتجر">🏠</button>
+      </div>
+    </header>
+
+    <main class="products-section">
+      <div class="section-header">
+        <h2>الطلبات الجديدة</h2>
+        <p>تتبع جميع الطلبات الواردة</p>
+      </div>
+
+      <div class="admin-panel">
+        <div class="admin-controls">
+          <button id="refreshOrders" class="button button-primary">تحديث الطلبات</button>
+          <button id="exportOrders" class="button button-secondary">تصدير الطلبات</button>
+        </div>
+
+        <div id="ordersContainer" class="saved-orders-list">
+          <!-- الطلبات ستظهر هنا -->
+        </div>
+
+        <div id="loadingMessage" class="order-status">جاري تحميل الطلبات...</div>
+        <div id="errorMessage" class="order-status error" style="display: none;"></div>
+      </div>
+    </main>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
+  <script src="admin.js" defer></script>
+</body>
+</html>
